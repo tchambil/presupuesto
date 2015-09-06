@@ -1,4 +1,6 @@
+/* -------------------------------------------------------*/
 /* CAPA DE ENTIDAD - TB. SICOP_CONTROLPRESUPUESTAL */
+/* -------------------------------------------------------*/
 
 using System;
 using System.Collections.Generic;
@@ -91,6 +93,247 @@ namespace VO
         {
             get { return _CPRE_VCH_DETALLEESPECIFICADEGASTO; }
             set { _CPRE_VCH_DETALLEESPECIFICADEGASTO = value; }
+        }
+    }
+}
+
+/* -------------------------------------------------------*/
+/* CAPA DE ENTIDAD - TB. SICOP_DETALLECONTROLPRESUPUESTAL */
+/* -------------------------------------------------------*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VO;
+
+namespace VO
+{
+    public class SICOP_DETALLECONTROLPRESUPUESTAL_VO
+    {
+        private int _CPRE_INT_IDCONTROLPRESUPUESTAL;
+
+        public int CPRE_INT_IDCONTROLPRESUPUESTAL
+        {
+            get { return _CPRE_INT_IDCONTROLPRESUPUESTAL; }
+            set { _CPRE_INT_IDCONTROLPRESUPUESTAL = value; }
+        }
+
+        private string _EGAS_VCH_IDESPECIFICADEGASTO;
+
+        public string EGAS_VCH_IDESPECIFICADEGASTO
+        {
+            get { return _EGAS_VCH_IDESPECIFICADEGASTO; }
+            set { _EGAS_VCH_IDESPECIFICADEGASTO = value; }
+        }
+        private string _META_VCH_IDMETA;
+
+        public string META_VCH_IDMETA
+        {
+            get { return _META_VCH_IDMETA; }
+            set { _META_VCH_IDMETA = value; }
+        }
+        private decimal _DCPR_DEC_IMPORTE;
+
+        public decimal DCPR_DEC_IMPORTE
+        {
+            get { return _DCPR_DEC_IMPORTE; }
+            set { _DCPR_DEC_IMPORTE = value; }
+        }
+    }
+}
+
+/* -------------------------------------------------------*/
+/* CAPA DE ENTIDAD - TB. SICOP_DOCUMENTO */
+/* -------------------------------------------------------*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using VO;
+
+namespace VO
+{
+    public class SICOP_DOCUMENTO_VO
+    {
+        private int _DOCU_INT_IDDOCUMENTO;
+
+        public int DOCU_INT_IDDOCUMENTO
+        {
+            get { return _DOCU_INT_IDDOCUMENTO; }
+            set { _DOCU_INT_IDDOCUMENTO = value; }
+        }
+
+        private string _DOCU_VCH_NOMBRE;
+
+        public string DOCU_VCH_NOMBRE
+        {
+            get { return _DOCU_VCH_NOMBRE; }
+            set { _DOCU_VCH_NOMBRE = value; }
+        }
+    }
+}
+
+/* -------------------------------------------------------*/
+/* CAPA DE ENTIDAD - TB. SICOP_ESPECIFICADEGASTO */
+/* -------------------------------------------------------*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using VO;
+
+namespace VO
+{
+    public class SICOP_ESPECIFICADEGASTO_VO
+    {
+        private string _EGAS_VCH_IDESPECIFICADEGASTO;
+
+        public string EGAS_VCH_IDESPECIFICADEGASTO
+        {
+            get { return _EGAS_VCH_IDESPECIFICADEGASTO; }
+            set { _EGAS_VCH_IDESPECIFICADEGASTO = value; }
+        }
+
+        private string _EGAS_VCH_DESCRIPCION;
+
+        public string EGAS_VCH_DESCRIPCION
+        {
+            get { return _EGAS_VCH_DESCRIPCION; }
+            set { _EGAS_VCH_DESCRIPCION = value; }
+        }
+       
+    }
+}
+
+/* ------------------------------------------------------------------*/
+/* CAPA DE ENTIDAD - TB. SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES */
+/* ------------------------------------------------------------------*/
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using VO;
+
+namespace VO
+{
+    public class SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES_VO
+    {
+        private int _MEGM_INT_IDMODIFICACION;
+
+        public int MEGM_INT_IDMODIFICACION
+        {
+            get { return _MEGM_INT_IDMODIFICACION; }
+            set { _MEGM_INT_IDMODIFICACION = value; }
+        }
+        private string _META_VCH_IDMETA;
+
+        public string META_VCH_IDMETA
+        {
+            get { return _META_VCH_IDMETA; }
+            set { _META_VCH_IDMETA = value; }
+        }
+        private string _EGAS_VCH_IDESPECIFICADEGASTO;
+
+        public string EGAS_VCH_IDESPECIFICADEGASTO
+        {
+            get { return _EGAS_VCH_IDESPECIFICADEGASTO; }
+            set { _EGAS_VCH_IDESPECIFICADEGASTO = value; }
+        }
+        private decimal _MEGM_DEC_PIMMODIFICADO;
+
+        public decimal MEGM_DEC_PIMMODIFICADO
+        {
+            get { return _MEGM_DEC_PIMMODIFICADO; }
+            set { _MEGM_DEC_PIMMODIFICADO = value; }
+        }
+    }
+}
+
+/* ------------------------------------------------------------------*/
+/*          CAPA DE ENTIDAD - TB. SICOP_META_ESPECIFICADEGASTO       */
+/* ------------------------------------------------------------------*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using VO;
+
+namespace VO
+{
+    public class SICOP_META_ESPECIFICADEGASTO_VO
+    {
+        private string _META_VCH_IDMETA;
+
+        public string META_VCH_IDMETA
+        {
+            get { return _META_VCH_IDMETA; }
+            set { _META_VCH_IDMETA = value; }
+        }
+        private string _EGAS_VCH_IDESPECIFICADEGASTO;
+
+        public string EGAS_VCH_IDESPECIFICADEGASTO
+        {
+            get { return _EGAS_VCH_IDESPECIFICADEGASTO; }
+            set { _EGAS_VCH_IDESPECIFICADEGASTO = value; }
+        }
+        private decimal _MEGA_DEC_PIM;
+
+        public decimal MEGA_DEC_PIM
+        {
+            get { return _MEGA_DEC_PIM; }
+            set { _MEGA_DEC_PIM = value; }
+        }
+    }
+}
+
+/* ------------------------------------------------------------------*/
+/*                  CAPA DE ENTIDAD - TB. SICOP_META                 */
+/* ------------------------------------------------------------------*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using VO;
+
+namespace VO
+{
+    public class SICOP_META_VO
+
+    {
+        private string _META_VCH_IDMETA;
+
+        public string META_VCH_IDMETA
+        {
+            get { return _META_VCH_IDMETA; }
+            set { _META_VCH_IDMETA = value; }
+        }
+        private string _META_VCH_DESCRIPCION;
+
+        public string META_VCH_DESCRIPCION
+        {
+            get { return _META_VCH_DESCRIPCION; }
+            set { _META_VCH_DESCRIPCION = value; }
         }
     }
 }
