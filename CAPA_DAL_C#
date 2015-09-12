@@ -1,0 +1,369 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Xml;
+
+namespace DAL
+{
+    public class ConexionDAL
+    {
+        public void EstablecerConexion(string conexion)
+        {
+            XmlDocument XmlDoc = new XmlDocument();
+            XmlDoc.Load(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).FilePath);
+            foreach (XmlElement xElement in XmlDoc.DocumentElement)
+            {
+                if (xElement.Name == "connectionStrings")
+                {
+                    xElement.FirstChild.Attributes[1].Value = conexion;
+                }
+            }
+            XmlDoc.Save(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).FilePath);
+            
+        }
+
+        public List<string> LeerConexion()
+        {
+            string dataSource = string.Empty;
+            string integratedSecurity = string.Empty;
+            string initialCatalog = string.Empty;
+            string user = string.Empty;
+            string password = string.Empty;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ConfigurationManager.RefreshSection("connectionStrings");      
+            string[] parametros = ConfigurationManager.ConnectionStrings["cadenaConexion"].ConnectionString.Split(';');
+            List<string> conexionBD = new List<string>();
+            string[] ds = new string[2];
+            string[] ise = new string[2];
+            string[] ic = new string[2];
+            string[] us = new string[2];
+            string[] pw = new string[2];
+            if (parametros.Length < 4)
+            {
+               
+                ds = parametros[0].Split('=');
+                dataSource = ds[1];
+                ise = parametros[1].Split('=');
+                integratedSecurity = ise[1];
+                ic = parametros[2].Split('=');
+                initialCatalog = ic[1];
+                conexionBD.Add(dataSource);
+                conexionBD.Add(integratedSecurity);
+                conexionBD.Add(initialCatalog);
+                
+                return conexionBD;
+            }
+            else
+            {
+                ds = parametros[0].Split('=');
+                dataSource = ds[1];
+                ic = parametros[1].Split('=');
+                initialCatalog = ic[1];
+                us = parametros[2].Split('=');
+                user = us[1];
+                pw = parametros[3].Split('=');
+                password = pw[1];
+                conexionBD.Add(dataSource);
+                conexionBD.Add(initialCatalog);
+                conexionBD.Add(user);
+                conexionBD.Add(password);
+                return conexionBD;
+            }
+           
+        }
+        
+
+        public SqlConnection getConexion()
+        {
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ConnectionString);
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using VO;
+
+namespace DAL
+{
+    public class SICOP_CONTROLPRESUPUESTAL_DAL
+    {
+
+        SqlConnection con = new ConexionDAL().getConexion();
+
+        public void AgregarControlPresupuestal(SICOP_CONTROLPRESUPUESTAL_VO cpresu)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_A_SICOP_CONTROLPRESUPUESTAL", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", cpresu.EGAS_VCH_IDESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@DOCU_INT_IDDOCUMENTO", cpresu.DOCU_INT_IDDOCUMENTO);
+            cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAINGRESO", cpresu.CPRE_DAT_FECHAINGRESO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_NROCOMPROBANTEPAGO", cpresu.CPRE_VCH_NROCOMPROBANTEPAGO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_NROSIAF", cpresu.CPRE_VCH_NROSIAF);
+            cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAGIRO", cpresu.CPRE_DAT_FECHAGIRO);
+            cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAPAGO", cpresu.CPRE_DAT_FECHAPAGO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_CONCEPTOESPECIFICADEGASTO", cpresu.CPRE_VCH_CONCEPTOESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_DETALLEESPECIFICADEGASTO", cpresu.CPRE_VCH_DETALLEESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_PARTIDACONTABLE", cpresu.CPRE_VCH_PARTIDACONTABLE);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+
+        public void ModificarControlPresupuestal(SICOP_CONTROLPRESUPUESTAL_VO cpresu)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_U_SICOP_CONTROLPRESUPUESTAL", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@CPRE_INT_IDCONTROLPRESUPUESTAL", cpresu.CPRE_INT_IDCONTROLPRESUPUESTAL);
+            cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", cpresu.EGAS_VCH_IDESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@DOCU_INT_IDDOCUMENTO", cpresu.DOCU_INT_IDDOCUMENTO);
+            cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAINGRESO", cpresu.CPRE_DAT_FECHAINGRESO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_NROCOMPROBANTEPAGO", cpresu.CPRE_VCH_NROCOMPROBANTEPAGO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_NROSIAF", cpresu.CPRE_VCH_NROSIAF);
+            cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAGIRO", cpresu.CPRE_DAT_FECHAGIRO);
+            cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAPAGO", cpresu.CPRE_DAT_FECHAPAGO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_CONCEPTOESPECIFICADEGASTO", cpresu.CPRE_VCH_CONCEPTOESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_DETALLEESPECIFICADEGASTO", cpresu.CPRE_VCH_DETALLEESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@CPRE_VCH_PARTIDACONTABLE", cpresu.CPRE_VCH_PARTIDACONTABLE);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+        public DataTable VerControlPresupuestal()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_S_SICOP_CONTROLPRESUPUESTAL_REPORT", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VO;
+
+namespace DAL
+{
+    public class SICOP_DETALLECONTROLPRESUPUESTAL_DAL
+    {
+
+        SqlConnection con = new ConexionDAL().getConexion();
+
+        public void AgregarDetalleControlPresupuestal(SICOP_DETALLECONTROLPRESUPUESTAL_VO detconpresu)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_A_SICOP_DETALLECONTROLPRESUPUESTAL", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@CPRE_INT_IDCONTROLPRESUPUESTAL", detconpresu.CPRE_INT_IDCONTROLPRESUPUESTAL);
+            cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", detconpresu.EGAS_VCH_IDESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@META_VCH_IDMETA", detconpresu.META_VCH_IDMETA);
+            cmd.Parameters.AddWithValue("@DCPR_DEC_IMPORTE", detconpresu.DCPR_DEC_IMPORTE);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VO;
+
+namespace DAL
+{
+    public class SICOP_DOCUMENTO_DAL
+    {
+
+        SqlConnection con = new ConexionDAL().getConexion();
+
+        public DataTable VerDocumentos()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_S_SICOP_DOCUMENTO", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VO;
+
+namespace DAL
+{
+    public class SICOP_ESPECIFICADEGASTO_DAL
+    {
+        SqlConnection con = new ConexionDAL().getConexion();
+
+        
+        public void AgregarEspecificaDeGasto(SICOP_ESPECIFICADEGASTO_VO esp)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_A_SICOP_ESPECIFICADEGASTO", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", esp.EGAS_VCH_IDESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@EGAS_VCH_DESCRIPCION", esp.EGAS_VCH_DESCRIPCION);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        public void ModificarEspecificaDeGasto(SICOP_ESPECIFICADEGASTO_VO esp)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_U_SICOP_ESPECIFICADEGASTO", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", esp.EGAS_VCH_IDESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@EGAS_VCH_DESCRIPCION", esp.EGAS_VCH_DESCRIPCION);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+        public DataTable VerEspecificasDeGastos()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_S_SICOP_ESPECIFICADEGASTO", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VO;
+
+namespace DAL
+{
+    public class SICOP_META_DAL
+    {
+        SqlConnection con = new ConexionDAL().getConexion();
+        public DataTable VerMetas()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_S_SICOP_META", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VO;
+
+
+namespace DAL
+{
+   public  class SICOP_META_ESPECIFICADEGASTO_DAL
+    {
+       SqlConnection con = new ConexionDAL().getConexion();
+       public void AgregarMetaEspecificaDeGasto(SICOP_META_ESPECIFICADEGASTO_VO metesp)
+       {
+           con.Open();
+           SqlCommand cmd = new SqlCommand("USP_A_SICOP_META_ESPECIFICADEGASTO", con);
+           cmd.CommandType = CommandType.StoredProcedure;
+           cmd.Parameters.AddWithValue("@META_VCH_IDMETA", metesp.META_VCH_IDMETA);
+           cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", metesp.EGAS_VCH_IDESPECIFICADEGASTO);
+           cmd.Parameters.AddWithValue("@MEGA_DEC_PIM", metesp.MEGA_DEC_PIM);
+           cmd.Parameters.AddWithValue("@MEGA_VCH_ANIO", metesp.MEGA_VCH_ANIO);
+           cmd.ExecuteNonQuery();
+           con.Close();
+       }
+     
+       public DataTable BusquedaDeMetaEspecificaDeGasto(string META_VCH_IDMETA)
+       {
+           con.Open();
+           SqlCommand cmd = new SqlCommand("USP_S_SICOP_META_ESPECIFICADEGASTO_REPORT", con);
+           cmd.CommandType = CommandType.StoredProcedure;
+           cmd.Parameters.AddWithValue("@_META_VCH_IDMETA", META_VCH_IDMETA);
+           SqlDataAdapter da = new SqlDataAdapter(cmd);
+           DataTable dt = new DataTable();
+           da.Fill(dt);
+           con.Close();
+           return dt;
+       }   
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VO;
+
+namespace DAL
+{
+    public class SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES_DAL
+    {
+        SqlConnection con = new ConexionDAL().getConexion();
+        public void AgregarMetaEspecificaDeGastoModificaciones(SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES_VO mem)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("USP_A_SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@META_VCH_IDMETA", mem.META_VCH_IDMETA);
+            cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", mem.EGAS_VCH_IDESPECIFICADEGASTO);
+            cmd.Parameters.AddWithValue("@MEGM_DEC_PIMMODIFICADO", mem.MEGM_DEC_PIMMODIFICADO);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+     
+    }
+}
