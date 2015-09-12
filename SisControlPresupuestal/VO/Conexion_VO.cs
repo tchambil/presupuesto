@@ -2,10 +2,10 @@
 
 public class BEConexion
 {
-    public static string _cadenaconexion = "Data Source=localhost;Initial Catalog=SISCONTROLPRESUPUESTAL;Integrated Security=True";
+    public static string strCadenaConexion = "Data Source=TEOFILO\\SQLEXPRESS;Initial Catalog=SISCONTROLPRESUPUESTAL;Integrated Security=True";
 
-    public static string cadenaconexion
+    public static string vg_strCadenaConexion
     {
-        get { return _cadenaconexion; } 
+        get { return strCadenaConexion; } 
     }
 }

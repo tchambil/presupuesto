@@ -35,16 +35,27 @@ namespace DAL
             con.Close();
 
         }
-        public DataTable VerEspecificasDeGastos()
+        public DataTable getEspecificasDeGastos()
         {
-            con.Open();
-            SqlCommand cmd = new SqlCommand("USP_S_SICOP_ESPECIFICADEGASTO", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            con.Close();
-            return dt;
+            DataTable mDtEspecificoDeGasto = new DataTable();
+            try
+            {
+                using (SqlConnection sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion))
+                {
+
+                    SqlCommand cmdComand = new SqlCommand("USP_S_SICOP_ESPECIFICADEGASTO", sqlConection);
+                    cmdComand.CommandType = CommandType.StoredProcedure;
+                    sqlConection.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmdComand);
+                    da.Fill(mDtEspecificoDeGasto);
+                    return mDtEspecificoDeGasto;
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return mDtEspecificoDeGasto;
         }
     }
 }

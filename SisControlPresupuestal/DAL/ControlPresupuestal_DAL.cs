@@ -12,103 +12,90 @@ namespace DAL
     public class ControlPresupuestal_DAL
     {
 
-        SqlConnection con = new CONEXION_DAL().getConexion();
+        //SqlConnection con = new CONEXION_DAL().getConexion();
 
         public bool Insert_ControlPresupuestal(ControlPresupuestal_VO pControlPresupuestal, SqlTransaction Trans)
         {
-            bool flag;
+            bool b_state;
             try
             {
-                 SqlCommand cmd = new SqlCommand("USP_A_SICOP_CONTROLPRESUPUESTAL");
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Connection = Trans.Connection;
-                cmd.Transaction = Trans;
-                cmd.Parameters.Clear();
+                 SqlCommand cmdComand = new SqlCommand("USP_A_SICOP_CONTROLPRESUPUESTAL");
+                cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
+                cmdComand.Connection = Trans.Connection;
+                cmdComand.Transaction = Trans;
+                cmdComand.Parameters.Clear();
 
-                cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO);
-                cmd.Parameters.AddWithValue("@DOCU_INT_IDDOCUMENTO", pControlPresupuestal.DOCU_INT_IDDOCUMENTO);
-                cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAINGRESO", pControlPresupuestal.CPRE_DAT_FECHAINGRESO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_NROCOMPROBANTEPAGO", pControlPresupuestal.CPRE_VCH_NROCOMPROBANTEPAGO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_NROSIAF", pControlPresupuestal.CPRE_VCH_NROSIAF);
-                cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAGIRO", pControlPresupuestal.CPRE_DAT_FECHAGIRO);
-                cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAPAGO", pControlPresupuestal.CPRE_DAT_FECHAPAGO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_CONCEPTOESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_CONCEPTOESPECIFICADEGASTO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_DETALLEESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_DETALLEESPECIFICADEGASTO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_PARTIDACONTABLE", pControlPresupuestal.CPRE_VCH_PARTIDACONTABLE);
-                flag = cmd.ExecuteNonQuery() > 0;
-                con.Close();
+                cmdComand.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@DOCU_INT_IDDOCUMENTO", pControlPresupuestal.DOCU_INT_IDDOCUMENTO);
+                cmdComand.Parameters.AddWithValue("@CPRE_DAT_FECHAINGRESO", pControlPresupuestal.CPRE_DAT_FECHAINGRESO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_NROCOMPROBANTEPAGO", pControlPresupuestal.CPRE_VCH_NROCOMPROBANTEPAGO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_NROSIAF", pControlPresupuestal.CPRE_VCH_NROSIAF);
+                cmdComand.Parameters.AddWithValue("@CPRE_DAT_FECHAGIRO", pControlPresupuestal.CPRE_DAT_FECHAGIRO);
+                cmdComand.Parameters.AddWithValue("@CPRE_DAT_FECHAPAGO", pControlPresupuestal.CPRE_DAT_FECHAPAGO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_CONCEPTOESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_CONCEPTOESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_DETALLEESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_DETALLEESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_PARTIDACONTABLE", pControlPresupuestal.CPRE_VCH_PARTIDACONTABLE);
+                b_state = cmdComand.ExecuteNonQuery() > 0;
+                
             }
             catch (Exception exception)
             {
                 throw exception;
             }
-            return flag;
+            return b_state;
         }
         public bool Update_ControlPresupuestal(ControlPresupuestal_VO pControlPresupuestal, SqlTransaction Trans)
         {
-            bool flag;
+            bool b_state;
             try
             {
               
-                SqlCommand cmd = new SqlCommand("USP_U_SICOP_CONTROLPRESUPUESTAL");
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Connection = Trans.Connection;
-                cmd.Transaction = Trans;
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPRE_INT_IDCONTROLPRESUPUESTAL", pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL);
-                cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO);
-                cmd.Parameters.AddWithValue("@DOCU_INT_IDDOCUMENTO", pControlPresupuestal.DOCU_INT_IDDOCUMENTO);
-                cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAINGRESO", pControlPresupuestal.CPRE_DAT_FECHAINGRESO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_NROCOMPROBANTEPAGO", pControlPresupuestal.CPRE_VCH_NROCOMPROBANTEPAGO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_NROSIAF", pControlPresupuestal.CPRE_VCH_NROSIAF);
-                cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAGIRO", pControlPresupuestal.CPRE_DAT_FECHAGIRO);
-                cmd.Parameters.AddWithValue("@CPRE_DAT_FECHAPAGO", pControlPresupuestal.CPRE_DAT_FECHAPAGO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_CONCEPTOESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_CONCEPTOESPECIFICADEGASTO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_DETALLEESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_DETALLEESPECIFICADEGASTO);
-                cmd.Parameters.AddWithValue("@CPRE_VCH_PARTIDACONTABLE", pControlPresupuestal.CPRE_VCH_PARTIDACONTABLE);
-                flag = cmd.ExecuteNonQuery() > 0;
+                SqlCommand cmdComand = new SqlCommand("USP_U_SICOP_CONTROLPRESUPUESTAL");
+                cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
+                cmdComand.Connection = Trans.Connection;
+                cmdComand.Transaction = Trans;
+                cmdComand.Parameters.Clear();
+                cmdComand.Parameters.AddWithValue("@CPRE_INT_IDCONTROLPRESUPUESTAL", pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL);
+                cmdComand.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@DOCU_INT_IDDOCUMENTO", pControlPresupuestal.DOCU_INT_IDDOCUMENTO);
+                cmdComand.Parameters.AddWithValue("@CPRE_DAT_FECHAINGRESO", pControlPresupuestal.CPRE_DAT_FECHAINGRESO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_NROCOMPROBANTEPAGO", pControlPresupuestal.CPRE_VCH_NROCOMPROBANTEPAGO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_NROSIAF", pControlPresupuestal.CPRE_VCH_NROSIAF);
+                cmdComand.Parameters.AddWithValue("@CPRE_DAT_FECHAGIRO", pControlPresupuestal.CPRE_DAT_FECHAGIRO);
+                cmdComand.Parameters.AddWithValue("@CPRE_DAT_FECHAPAGO", pControlPresupuestal.CPRE_DAT_FECHAPAGO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_CONCEPTOESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_CONCEPTOESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_DETALLEESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_DETALLEESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@CPRE_VCH_PARTIDACONTABLE", pControlPresupuestal.CPRE_VCH_PARTIDACONTABLE);
+                b_state = cmdComand.ExecuteNonQuery() > 0;
                  
             }
             catch (Exception exception)
             {
                 throw exception;
             }
-            return flag;
+            return b_state;
         }
-        public DataTable VerControlPresupuestal()
+        public DataTable List_ControlPresupuestal()
         {
-            DataTable dt = new DataTable();
+            DataTable mDtControlPresupuestal = new DataTable();
             try
             {
-                using (SqlConnection Conn = new SqlConnection(BEConexion.cadenaconexion))
+                using (SqlConnection sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion))
                 {
  
-                SqlCommand cmd = new SqlCommand("USP_S_SICOP_CONTROLPRESUPUESTAL_REPORT", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                Conn.Open();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                return dt;
+                SqlCommand cmdComand = new SqlCommand("USP_S_SICOP_CONTROLPRESUPUESTAL_REPORT", sqlConection);
+                cmdComand.CommandType = CommandType.StoredProcedure;
+                sqlConection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmdComand);
+                da.Fill(mDtControlPresupuestal);
+                return mDtControlPresupuestal;
                 }
             }
             catch (Exception exception)
             {
                 throw exception;
             }
-            return dt;
-        }
-
-        //public DataTable BusquedaDeDatosDePlanilla(string busqueda)
-        //{
-        //    con.Open();
-        //    SqlCommand cmd = new SqlCommand("SPR_BusquedaDeDatosDePlanilla", con);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.Parameters.AddWithValue("@busqueda", busqueda);
-        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //    DataTable dt = new DataTable();
-        //    da.Fill(dt);
-        //    con.Close();
-        //    return dt;
-        //}   
+            return mDtControlPresupuestal;
+        }        
     }
 }

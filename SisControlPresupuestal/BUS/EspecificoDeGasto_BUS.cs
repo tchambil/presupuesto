@@ -11,9 +11,16 @@ namespace BUS
 {
     public class EspecificoDeGasto_BUS
     {
-        public DataTable VerEspecificasDeGastos()
+        public DataTable getEspecificasDeGastos()
         {
-            return new DAEspecificoDeGasto().VerEspecificasDeGastos();
+            DataTable mDtEspecificoDeGasto = new DataTable();
+            try
+            {
+                mDtEspecificoDeGasto = new DAEspecificoDeGasto().getEspecificasDeGastos();
+            }
+            catch (Exception ex) { throw ex; }
+            return mDtEspecificoDeGasto;
+             
         }
         public void AgregarEspecificaDeGasto(VO.EspecificoDeGasto_BUS espec)
         {

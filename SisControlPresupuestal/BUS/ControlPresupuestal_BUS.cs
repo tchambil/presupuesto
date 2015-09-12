@@ -15,58 +15,17 @@ namespace BUS
         {
             SqlConnection Conn = null;
             SqlTransaction Trans = null;
-            bool flag = false;
+            bool b_state = false;
             try
             {
-                Conn = new SqlConnection(BEConexion.cadenaconexion);
+                Conn = new SqlConnection(BEConexion.vg_strCadenaConexion);
                 Conn.Open();
                 Trans = Conn.BeginTransaction();
                 if (ControlPresupuestal != null)
                 {
-                    flag = new ControlPresupuestal_DAL().Insert_ControlPresupuestal(ControlPresupuestal, Trans);
+                    b_state = new ControlPresupuestal_DAL().Insert_ControlPresupuestal(ControlPresupuestal, Trans);
                 }
-                if (flag)
-                {
-                    Trans.Commit();
-
-                }
-                else
-                {
-                    Trans.Rollback();
-                }
-            }
-
-            catch (Exception exception)
-            {
-                if (Trans != null)
-                    Trans.Rollback();
-                return false;
-            }
-            finally {
-                if (Conn != null)
-                {
-                    Conn.Close();
-                }
-                Conn.Dispose();
-
-            }
-            return flag;
-        }
-        public bool Update_ControlPresupuestal(ControlPresupuestal_VO ControlPresupuestal)
-        {
-            SqlConnection Conn = null;
-            SqlTransaction Trans = null;
-            bool flag = false;
-            try
-            {
-                Conn = new SqlConnection(BEConexion.cadenaconexion);
-                Conn.Open();
-                Trans = Conn.BeginTransaction();
-                if (ControlPresupuestal != null)
-                {
-                    flag = new ControlPresupuestal_DAL().Update_ControlPresupuestal(ControlPresupuestal, Trans);
-                }
-                if (flag)
+                if (b_state)
                 {
                     Trans.Commit();
 
@@ -92,16 +51,67 @@ namespace BUS
                 Conn.Dispose();
 
             }
-            return flag;
+            return b_state;
+        }
+        public bool Update_ControlPresupuestal(ControlPresupuestal_VO ControlPresupuestal)
+        {
+            SqlConnection Conn = null;
+            SqlTransaction Trans = null;
+            bool b_state = false;
+            try
+            {
+                Conn = new SqlConnection(BEConexion.vg_strCadenaConexion);
+                Conn.Open();
+                Trans = Conn.BeginTransaction();
+                if (ControlPresupuestal != null)
+                {
+                    b_state = new ControlPresupuestal_DAL().Update_ControlPresupuestal(ControlPresupuestal, Trans);
+                }
+                if (b_state)
+                {
+                    Trans.Commit();
+
+                }
+                else
+                {
+                    Trans.Rollback();
+                }
+            }
+
+            catch (Exception exception)
+            {
+                if (Trans != null)
+                    Trans.Rollback();
+                return false;
+            }
+            finally
+            {
+                if (Conn != null)
+                {
+                    Conn.Close();
+                }
+                Conn.Dispose();
+
+            }
+            return b_state;
         }
 
-    } 
 
+        public DataTable List_ControlPresupuestal()
+        {
+            DataTable mDtControlPresupuestal = new DataTable();
+            try
+            {
+                mDtControlPresupuestal = new ControlPresupuestal_DAL().List_ControlPresupuestal();
+            }
+            catch (Exception ex) { throw ex; }
+            return mDtControlPresupuestal;
+        }
         //public DataTable BusquedaDeDatosDePlanilla(string busqueda)
         //{
         //    DevengadosDAL datosDAL = new DevengadosDAL();
         //    DataTable dt = datosDAL.BusquedaDeDatosDePlanilla(busqueda);
         //    return dt;
         //}
-    
+    }
 }
