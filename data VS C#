@@ -293,6 +293,15 @@ namespace VO
             get { return _EGAS_VCH_IDESPECIFICADEGASTO; }
             set { _EGAS_VCH_IDESPECIFICADEGASTO = value; }
         }
+      
+        private string _MEGA_VCH_ANIO;
+
+        public string MEGA_VCH_ANIO
+        {
+            get { return _MEGA_VCH_ANIO; }
+            set { _MEGA_VCH_ANIO = value; }
+        }
+        
         private decimal _MEGA_DEC_PIM;
 
         public decimal MEGA_DEC_PIM
