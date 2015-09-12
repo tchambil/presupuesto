@@ -1,0 +1,13 @@
+1. La Capa de Entidad (CAPA_VO) simplemente sirve para encapsular los campos de cada tabla nada mas.
+2. La Capa de Datos (CAPA_DAL) es para declarar los procedimientos almacenados creados en el sql con sus determinados parámetros 
+en la cual se inicializa primaremente la conexcion SQL para esto y no tener problema alguno.
+3. La Capa Lógica o de Negocios (CAPA_BUS) es para inicializar los procedimientos almacenados anteriormente creados o declarados
+en la capa de Datos....
+4. Finalmente en la Capa de Presentacion (WinUI) sirve mas para la visualización de la información y su funcionamiento respectivo...
+5. La carpeta denominada "Framework" inclui clases necesarias en los formularios de la capa de presentacion como para el cambio
+de estados de botones, combos, grilla, entre otros....es la parte estética de la capa de presentación es para trabajar de una 
+forma mas ordenada y evitar codigo innecesario en las clases almacenadas en la capa de presentacion.
+
+Y en resumen en cuanto al sistema el funcionamiento debe ser similar o casi igual al excel....obviamente en el sistema se agilizaran
+consultas, la seguridad por medio de Usuarios (cree esta tabla en la BD) y los reportes mensuales o anuales segun sea el caso
+de manera que se optimizan los tiempos y la calidad de los procesos en cuanto al Control Presupuestal de la entidad.
