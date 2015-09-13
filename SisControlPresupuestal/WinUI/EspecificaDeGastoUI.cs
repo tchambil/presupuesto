@@ -38,7 +38,7 @@ namespace WinUI
         private void DatosTabla()
         {
             BUS.EspecificoDeGasto_BUS espe = new BUS.EspecificoDeGasto_BUS();
-            dgvPartidasEspecificas.DataSource = espe.VerEspecificasDeGastos();
+            dgvPartidasEspecificas.DataSource = espe.getEspecificasDeGastos();
 
         }
         private void SeleccionarFila()

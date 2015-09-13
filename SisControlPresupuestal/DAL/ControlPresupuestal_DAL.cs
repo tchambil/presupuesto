@@ -14,7 +14,7 @@ namespace DAL
 
         //SqlConnection con = new CONEXION_DAL().getConexion();
 
-        public bool Insert_ControlPresupuestal(ControlPresupuestal_VO pControlPresupuestal, SqlTransaction Trans)
+        public bool Insert_ControlPresupuestal(ref ControlPresupuestal_VO pControlPresupuestal, SqlTransaction Trans)
         {
             bool b_state;
             try
@@ -24,8 +24,8 @@ namespace DAL
                 cmdComand.Connection = Trans.Connection;
                 cmdComand.Transaction = Trans;
                 cmdComand.Parameters.Clear();
-
-                cmdComand.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO);
+                cmdComand.Parameters.Add("@EGAS_VCH_IDESPECIFICADEGASTO", SqlDbType.Int).Value=0;
+                 cmdComand.Parameters["@EGAS_VCH_IDESPECIFICADEGASTO"].Direction = ParameterDirection.Output;
                 cmdComand.Parameters.AddWithValue("@DOCU_INT_IDDOCUMENTO", pControlPresupuestal.DOCU_INT_IDDOCUMENTO);
                 cmdComand.Parameters.AddWithValue("@CPRE_DAT_FECHAINGRESO", pControlPresupuestal.CPRE_DAT_FECHAINGRESO);
                 cmdComand.Parameters.AddWithValue("@CPRE_VCH_NROCOMPROBANTEPAGO", pControlPresupuestal.CPRE_VCH_NROCOMPROBANTEPAGO);
@@ -36,6 +36,10 @@ namespace DAL
                 cmdComand.Parameters.AddWithValue("@CPRE_VCH_DETALLEESPECIFICADEGASTO", pControlPresupuestal.CPRE_VCH_DETALLEESPECIFICADEGASTO);
                 cmdComand.Parameters.AddWithValue("@CPRE_VCH_PARTIDACONTABLE", pControlPresupuestal.CPRE_VCH_PARTIDACONTABLE);
                 b_state = cmdComand.ExecuteNonQuery() > 0;
+                if (b_state)
+                {
+                    pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL =Convert.ToInt32( cmdComand.Parameters["@EGAS_VCH_IDESPECIFICADEGASTO"].Value);
+                }
                 
             }
             catch (Exception exception)

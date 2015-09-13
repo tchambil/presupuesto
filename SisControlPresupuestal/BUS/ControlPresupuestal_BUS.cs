@@ -11,7 +11,7 @@ namespace BUS
 {
     public class ControlPresupuestal_BUS
     {
-        public bool Insert_ControlPresupuestal(ControlPresupuestal_VO ControlPresupuestal)
+        public bool Insert_ControlPresupuestal(ref ControlPresupuestal_VO ControlPresupuestal, DataTable DtDetalleControlPresupuestal)
         {
             SqlConnection Conn = null;
             SqlTransaction Trans = null;
@@ -23,7 +23,7 @@ namespace BUS
                 Trans = Conn.BeginTransaction();
                 if (ControlPresupuestal != null)
                 {
-                    b_state = new ControlPresupuestal_DAL().Insert_ControlPresupuestal(ControlPresupuestal, Trans);
+                    b_state = new ControlPresupuestal_DAL().Insert_ControlPresupuestal(ref ControlPresupuestal, Trans);
                 }
                 if (b_state)
                 {

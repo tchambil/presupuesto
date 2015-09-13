@@ -11,9 +11,17 @@ namespace BUS
 {
     public class Documento_BUS
     {
-        public DataTable VerDocumentos()
+        public DataTable getDocumento()
         {
-            return new DADocumento().VerDocumentos();
+            
+
+            DataTable mDtDocumento = new DataTable();
+            try
+            {
+                mDtDocumento = new DADocumento().getDocumento();
+            }
+            catch (Exception ex) { throw ex; }
+            return mDtDocumento;
         }
     }
 }

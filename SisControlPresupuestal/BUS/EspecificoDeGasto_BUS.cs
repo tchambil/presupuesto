@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using VO;
-
+using System.Data.SqlClient;
 namespace BUS
 {
     public class EspecificoDeGasto_BUS

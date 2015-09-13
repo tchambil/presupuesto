@@ -11,9 +11,16 @@ namespace BUS
 {
     public class Meta_BUS
     {
-        public DataTable VerMetas()
+        public DataTable getMeta()
         {
-            return new DAMeta().VerMetas();
+             
+            DataTable mDtMeta = new DataTable();
+            try
+            {
+                mDtMeta = new DAMeta().getMeta();
+            }
+            catch (Exception ex) { throw ex; }
+            return mDtMeta;
         }
       
     }
