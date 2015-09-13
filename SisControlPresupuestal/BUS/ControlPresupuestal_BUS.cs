@@ -11,89 +11,134 @@ namespace BUS
 {
     public class ControlPresupuestal_BUS
     {
-        public bool Insert_ControlPresupuestal(ref ControlPresupuestal_VO ControlPresupuestal, DataTable DtDetalleControlPresupuestal)
+        public bool Insert_ControlPresupuestal(ref ControlPresupuestal_VO pControlPresupuestal, DataTable DtDetalleControlPresupuestal)
         {
-            SqlConnection Conn = null;
-            SqlTransaction Trans = null;
-            bool b_state = false;
+            SqlConnection sqlConection = null;
+            SqlTransaction TransControlPresupuestal = null;
+            bool b_ControlPresupuestal = false;
+            bool b_DetalleControlP = false;
             try
             {
-                Conn = new SqlConnection(BEConexion.vg_strCadenaConexion);
-                Conn.Open();
-                Trans = Conn.BeginTransaction();
-                if (ControlPresupuestal != null)
+                sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion);
+                sqlConection.Open();
+                TransControlPresupuestal = sqlConection.BeginTransaction();
+                if (pControlPresupuestal != null)
                 {
-                    b_state = new ControlPresupuestal_DAL().Insert_ControlPresupuestal(ref ControlPresupuestal, Trans);
+                    b_ControlPresupuestal = new ControlPresupuestal_DAL().Insert_ControlPresupuestal(ref pControlPresupuestal, TransControlPresupuestal);
+                    if (b_ControlPresupuestal)
+                    {
+                        int intDetalleCount = 0;
+                        foreach (DataRow dtRow in DtDetalleControlPresupuestal.Rows)
+                        {
+                            DetalleControlPresupuestal_VO pDetalleControlPresupuestal = new DetalleControlPresupuestal_VO();
+                            pDetalleControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL = pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL;
+                            pDetalleControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO = pControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO;
+                            pDetalleControlPresupuestal.DCPR_DEC_IMPORTE = Convert.ToDecimal(dtRow["DCPR_DEC_IMPORTE"]);
+                            pDetalleControlPresupuestal.META_VCH_IDMETA = dtRow["META_VCH_IDMETA"].ToString();
+                            if (new DetalleControlPresupuestal_DAL().Insert_DetalleControlPresupuestal(pDetalleControlPresupuestal, TransControlPresupuestal))
+                            {
+                                intDetalleCount++;
+                            }
+
+
+                        }
+                        b_DetalleControlP = (intDetalleCount == DtDetalleControlPresupuestal.Rows.Count);
+
+                    }
                 }
-                if (b_state)
+                if (b_ControlPresupuestal && b_DetalleControlP)
                 {
-                    Trans.Commit();
+                    TransControlPresupuestal.Commit();
 
                 }
                 else
                 {
-                    Trans.Rollback();
+                    TransControlPresupuestal.Rollback();
                 }
             }
 
             catch (Exception exception)
             {
-                if (Trans != null)
-                    Trans.Rollback();
+                if (TransControlPresupuestal != null)
+                    TransControlPresupuestal.Rollback();
                 return false;
             }
             finally
             {
-                if (Conn != null)
+                if (sqlConection != null)
                 {
-                    Conn.Close();
+                    sqlConection.Close();
                 }
-                Conn.Dispose();
+                sqlConection.Dispose();
 
             }
-            return b_state;
+            return b_ControlPresupuestal;
         }
-        public bool Update_ControlPresupuestal(ControlPresupuestal_VO ControlPresupuestal)
+        public bool Update_ControlPresupuestal(ControlPresupuestal_VO pControlPresupuestal, DataTable DtDetalleControlPresupuestal)
         {
-            SqlConnection Conn = null;
-            SqlTransaction Trans = null;
-            bool b_state = false;
+            SqlConnection sqlConection = null;
+            SqlTransaction TransControlPresupuestal = null;
+            bool b_ControlPresupuestal = false;
+            bool b_DetalleControlP = false;
+            bool b_DeleteDetalleControlP = false;
             try
             {
-                Conn = new SqlConnection(BEConexion.vg_strCadenaConexion);
-                Conn.Open();
-                Trans = Conn.BeginTransaction();
-                if (ControlPresupuestal != null)
+                sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion);
+                sqlConection.Open();
+                TransControlPresupuestal = sqlConection.BeginTransaction();
+                if (pControlPresupuestal != null)
                 {
-                    b_state = new ControlPresupuestal_DAL().Update_ControlPresupuestal(ControlPresupuestal, Trans);
+                    b_DeleteDetalleControlP = new DetalleControlPresupuestal_DAL().Delete_DetalleControlPresupuestal(pControlPresupuestal, TransControlPresupuestal);
+                    if (b_DeleteDetalleControlP)
+                    {
+                        b_ControlPresupuestal = new ControlPresupuestal_DAL().Update_ControlPresupuestal(pControlPresupuestal, TransControlPresupuestal);
+                        if (b_ControlPresupuestal)
+                        {
+                            int intDetalleCount = 0;
+                            foreach (DataRow dtRow in DtDetalleControlPresupuestal.Rows)
+                            {
+                                DetalleControlPresupuestal_VO pDetalleControlPresupuestal = new DetalleControlPresupuestal_VO();
+                                pDetalleControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL = pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL;
+                                pDetalleControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO = pControlPresupuestal.EGAS_VCH_IDESPECIFICADEGASTO;
+                                pDetalleControlPresupuestal.DCPR_DEC_IMPORTE = Convert.ToDecimal(dtRow["DCPR_DEC_IMPORTE"]);
+                                pDetalleControlPresupuestal.META_VCH_IDMETA = dtRow["META_VCH_IDMETA"].ToString();
+                                if (new DetalleControlPresupuestal_DAL().Insert_DetalleControlPresupuestal(pDetalleControlPresupuestal, TransControlPresupuestal))
+                                {
+                                    intDetalleCount++;
+                                }
+                            }
+                            b_DetalleControlP = (intDetalleCount == DtDetalleControlPresupuestal.Rows.Count);
+                        }
+                    }
+
                 }
-                if (b_state)
+                if (b_ControlPresupuestal && b_DetalleControlP && b_DeleteDetalleControlP)
                 {
-                    Trans.Commit();
+                    TransControlPresupuestal.Commit();
 
                 }
                 else
                 {
-                    Trans.Rollback();
+                    TransControlPresupuestal.Rollback();
                 }
             }
 
             catch (Exception exception)
             {
-                if (Trans != null)
-                    Trans.Rollback();
+                if (TransControlPresupuestal != null)
+                    TransControlPresupuestal.Rollback();
                 return false;
             }
             finally
             {
-                if (Conn != null)
+                if (sqlConection != null)
                 {
-                    Conn.Close();
+                    sqlConection.Close();
                 }
-                Conn.Dispose();
+                sqlConection.Dispose();
 
             }
-            return b_state;
+            return b_ControlPresupuestal;
         }
 
 

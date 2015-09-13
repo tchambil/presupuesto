@@ -10,11 +10,16 @@ namespace BUS
 {
     public class DetalleControlPresupuestal_BUS
     {
-        public void AgregarDetalleControlPresupuestal(DetalleControlPresupuestal_VO dev)
+        public DataTable List_DetalleControlPresupuestal(int inIdControlPresupuestal)
         {
-            DADetalleControlPresupuestal devDAL = new DADetalleControlPresupuestal();
-            devDAL.AgregarDetalleControlPresupuestal(dev);
+            DataTable mDtDetalleControlPresupuestal = new DataTable();
+            try
+            {
+                mDtDetalleControlPresupuestal = new DetalleControlPresupuestal_DAL().List_DetalleControlPresupuestal(inIdControlPresupuestal);
+            }
+            catch (Exception ex) { throw ex; }
+            return mDtDetalleControlPresupuestal;
         }
-      
+
     }
 }
