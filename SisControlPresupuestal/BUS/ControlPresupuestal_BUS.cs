@@ -152,11 +152,6 @@ namespace BUS
             catch (Exception ex) { throw ex; }
             return mDtControlPresupuestal;
         }
-        //public DataTable BusquedaDeDatosDePlanilla(string busqueda)
-        //{
-        //    DevengadosDAL datosDAL = new DevengadosDAL();
-        //    DataTable dt = datosDAL.BusquedaDeDatosDePlanilla(busqueda);
-        //    return dt;
-        //}
+       
     }
 }
