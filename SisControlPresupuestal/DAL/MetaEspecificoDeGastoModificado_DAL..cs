@@ -65,7 +65,7 @@ namespace DAL
 
         public DataTable List_MetaEspecificaDeGasto(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto)
         {
-            DataTable mDtMetaEspecificaDeGasto = new DataTable();
+            DataTable mDtMetaEspecificaDeGastoModificado = new DataTable();
             try
             {
                 using (SqlConnection sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion))
@@ -77,8 +77,8 @@ namespace DAL
                     cmdComand.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO);
                     sqlConection.Open();
                     SqlDataAdapter da = new SqlDataAdapter(cmdComand);
-                    da.Fill(mDtMetaEspecificaDeGasto);
-                    return mDtMetaEspecificaDeGasto;
+                    da.Fill(mDtMetaEspecificaDeGastoModificado);
+                    return mDtMetaEspecificaDeGastoModificado;
                 }
             }
             catch (Exception e)
@@ -87,7 +87,7 @@ namespace DAL
                     Console.WriteLine("IOException source: {0}", e.Source);
                 throw;
             }
-            return mDtMetaEspecificaDeGasto;
+            return mDtMetaEspecificaDeGastoModificado;
         }
     }
 }

@@ -61,17 +61,27 @@ namespace WinUI
                 this.dgvGastoEspecifico.DataSource = mDtMetaEspecificoDeGasto;
                 this.dgvGastoEspecifico.Update();
             }
+            prcCalculoTotalSaldo();
         }
         private void prcList_MetaEspecificoDeGastoModificado()
         {
-            MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
+            
             DataTable mDtMetaEspecificoDeGastoModificado = new BUS.MetaEspecificoDeGastoModificado_BUS().List_MetaEspecificaDeGastoModificado(prcGetMetaEspecificoDeGasto());
             if (mDtMetaEspecificoDeGastoModificado != null)
-            {
-                this.dgvModificado.DataSource = null;
-                this.dgvModificado.DataSource = mDtMetaEspecificoDeGastoModificado;
-                this.dgvModificado.Update();
-            }
+             {
+                 Int32 i = 0;
+                 dgvModificado.Rows.Clear();
+                 foreach (DataRow rw in mDtMetaEspecificoDeGastoModificado.Rows)
+                 {
+                     dgvModificado.Rows.Add();
+                     int RowIndex = dgvModificado.RowCount - 1;
+                     DataGridViewRow R = dgvModificado.Rows[RowIndex];
+                    R.Cells["colIdModificado"].Value = rw["MEGM_INT_IDMODIFICACION"];
+                    R.Cells["colidMetaModificado"].Value =  rw["META_VCH_IDMETA"];
+                     R.Cells["colImporteModificado"].Value = rw["MEGM_DEC_PIMMODIFICADO"];
+                     R.Cells["colIdEspecificaModificado"].Value = rw["EGAS_VCH_IDESPECIFICADEGASTO"];
+             }
+             }
         }
         private void prcList_Meta()
         {
@@ -88,48 +98,17 @@ namespace WinUI
                 this.cmbMetas.Update();
             }
         }
-        private void CalculoTotal()
+         private void prcCalculoTotalSaldo()
         {
-            foreach(DataGridViewRow item in dgvGastoEspecifico.Rows)
-            {
-                int n = item.Index;
-                dgvGastoEspecifico.Rows[n].Cells[15].Value =
-                (Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[3].Value.ToString()) + 
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[4].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[5].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[6].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[7].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[8].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[9].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[10].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[11].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[12].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[13].Value.ToString()) +
-                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[14].Value.ToString()) 
-                ).ToString();
-            }
-            txtTotal.Text = "0";
+            double sumatoria = 0;
             foreach (DataGridViewRow item in dgvGastoEspecifico.Rows)
-            {
-                int n = item.Index;
+            { 
+                sumatoria += Convert.ToDouble(item.Cells["colSaldo"].Value);
 
-                txtTotal.Text = (Decimal.Parse(txtTotal.Text.ToString())
-                    + Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[15].Value.ToString())).ToString();
             }
+            this.txtTotal.Text = sumatoria.ToString();
         }
-        private void CalculoSaldo()
-        {
-            
-            foreach (DataGridViewRow item in dgvGastoEspecifico.Rows)
-            {
-                int n = item.Index;
- 
-            }
-        }
-        #region Calculos Pasados
-     
-        #endregion 
-       
+
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             Nuevo = true;
@@ -156,7 +135,7 @@ namespace WinUI
             MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
             pMetaEspecificoDeGastoModificado.EGAS_VCH_IDESPECIFICADEGASTO = this.cmbEspecifica.SelectedValue.ToString();
             pMetaEspecificoDeGastoModificado.META_VCH_IDMETA = this.cmbMetas.SelectedValue.ToString();
-            pMetaEspecificoDeGastoModificado.MEGM_DEC_PIMMODIFICADO = Convert.ToDecimal(this.txtPIModificado.ToString());
+            pMetaEspecificoDeGastoModificado.MEGM_DEC_PIMMODIFICADO = Convert.ToDecimal(this.txtPIModificado.Text);
             return pMetaEspecificoDeGastoModificado;
         }
         private void prcSeleccionarFilaMetaEspefica()
@@ -167,6 +146,12 @@ namespace WinUI
                 txtpim.Text = dgvGastoEspecifico["colPIM", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
                  prcList_MetaEspecificoDeGastoModificado();
             
+        }
+        private void prcSeleccionarFilaMetaEspeficaModificado()
+        { 
+           this.txtPIModificado.Text = dgvModificado["colImporteModificado", dgvModificado.CurrentRow.Index].Value.ToString();
+           
+
         }
         private void prcSeleccionarFilaMetaEspeficaModifica()
         {
@@ -242,11 +227,7 @@ namespace WinUI
             prcSeleccionarFilaMetaEspefica();
         }
 
-        private void btnCalcular_Click(object sender, EventArgs e)
-        {
-            CalculoTotal();
-            CalculoSaldo();
-        }
+        
 
         private void btnGuardarModifica_Click(object sender, EventArgs e)
         {
@@ -292,6 +273,63 @@ namespace WinUI
         private void txtPIModificado_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvModificado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.prcSeleccionarFilaMetaEspeficaModificado();
+        }
+
+        private void dgvModificado_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                if (this.dgvModificado.Columns[e.ColumnIndex].Name == "colImporteModificado")
+                {
+                    if (e.Value != null)
+                    {
+                        if (Convert.ToDecimal(e.Value) < 0)
+                        {
+                            e.CellStyle.ForeColor = Color.Red;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void dgvGastoEspecifico_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                if (this.dgvGastoEspecifico.Columns[e.ColumnIndex].Name == "colModifiacion")
+                {
+                    if (e.Value != null)
+                    {
+                        if (Convert.ToDecimal(e.Value) < 0)
+                        {
+                            e.CellStyle.ForeColor = Color.Red;
+                        }
+                    }
+                }
+                if (this.dgvGastoEspecifico.Columns[e.ColumnIndex].Name == "colSaldo")
+                {
+                    if (e.Value != null)
+                    {
+                        if (Convert.ToDecimal(e.Value) < 0)
+                        {
+                            e.CellStyle.ForeColor = Color.Red;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

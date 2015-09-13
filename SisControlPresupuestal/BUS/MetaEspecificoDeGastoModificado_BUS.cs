@@ -104,14 +104,14 @@ namespace BUS
         }
         public DataTable List_MetaEspecificaDeGastoModificado(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto)
         {
-            DataTable mDtMetaEspecificaDeGasto = new DataTable();
+            DataTable mDtMetaEspecificaDeGastoModifica = new DataTable();
             try
             {
-                mDtMetaEspecificaDeGasto = new MetaEspecificoDeGastoModificado_DAL().List_MetaEspecificaDeGasto(pMetaEspecificoDeGasto);
+                mDtMetaEspecificaDeGastoModifica = new MetaEspecificoDeGastoModificado_DAL().List_MetaEspecificaDeGasto(pMetaEspecificoDeGasto);
 
             }
             catch (Exception ex) { throw ex; }
-            return mDtMetaEspecificaDeGasto;
+            return mDtMetaEspecificaDeGastoModifica;
         }
     }
 }
