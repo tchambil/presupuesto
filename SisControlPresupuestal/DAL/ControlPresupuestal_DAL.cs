@@ -17,7 +17,7 @@ namespace DAL
         public bool Insert_ControlPresupuestal(ref ControlPresupuestal_VO pControlPresupuestal, SqlTransaction TransControlPresupuestal)
         {
             bool b_ControlPresupuestal;
-            string teo = null;
+          
             try
            {
                  SqlCommand cmdComand = new SqlCommand("USP_A_SICOP_CONTROLPRESUPUESTAL");

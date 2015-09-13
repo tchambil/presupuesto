@@ -297,5 +297,11 @@ namespace WinUI
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DetalleControlPresupuestalUI esp = new DetalleControlPresupuestalUI(0);
+            esp.ShowDialog();
+        }
     }
 }

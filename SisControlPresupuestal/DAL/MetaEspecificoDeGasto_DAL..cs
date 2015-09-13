@@ -10,33 +10,90 @@ using VO;
 
 namespace DAL
 {
-   public  class DAMetaEspecificoDeGasto
+   public  class MetaEspecificoDeGasto_DAL
     {
-       SqlConnection con = new CONEXION_DAL().getConexion();
-       public void AgregarMetaEspecificaDeGasto(MetaEspecificoDeGasto_VO metesp)
-       {
-           con.Open();
-           SqlCommand cmd = new SqlCommand("USP_A_SICOP_META_ESPECIFICADEGASTO", con);
-           cmd.CommandType = CommandType.StoredProcedure;
-           cmd.Parameters.AddWithValue("@META_VCH_IDMETA", metesp.META_VCH_IDMETA);
-           cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", metesp.EGAS_VCH_IDESPECIFICADEGASTO);
-           cmd.Parameters.AddWithValue("@MEGA_DEC_PIM", metesp.MEGA_DEC_PIM);
-           cmd.Parameters.AddWithValue("@MEGA_VCH_ANIO", metesp.MEGA_VCH_ANIO);
-           cmd.ExecuteNonQuery();
-           con.Close();
-       }
+   
+
+        public bool Insert_MetaEspecificoDeGasto(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto, SqlTransaction TransControlPresupuestal)
+        {
+            bool b_MetaEspecifica;
+           
+            try
+            {
+                SqlCommand cmdComand = new SqlCommand("USP_A_SICOP_META_ESPECIFICADEGASTO");
+                cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
+                cmdComand.Connection = TransControlPresupuestal.Connection;
+                cmdComand.Transaction = TransControlPresupuestal;
+                cmdComand.Parameters.Clear();
+
+                cmdComand.Parameters.AddWithValue("@META_VCH_IDMETA", pMetaEspecificoDeGasto.META_VCH_IDMETA);
+                cmdComand.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@MEGA_DEC_PIM", pMetaEspecificoDeGasto.MEGA_DEC_PIM);
+                cmdComand.Parameters.AddWithValue("@MEGA_VCH_ANIO", pMetaEspecificoDeGasto.MEGA_VCH_ANIO);
+                b_MetaEspecifica = cmdComand.ExecuteNonQuery() > 0;
      
-       public DataTable BusquedaDeMetaEspecificaDeGasto(string META_VCH_IDMETA)
-       {
-           con.Open();
-           SqlCommand cmd = new SqlCommand("USP_S_SICOP_META_ESPECIFICADEGASTO_REPORT", con);
-           cmd.CommandType = CommandType.StoredProcedure;
-           cmd.Parameters.AddWithValue("@_META_VCH_IDMETA", META_VCH_IDMETA);
-           SqlDataAdapter da = new SqlDataAdapter(cmd);
-           DataTable dt = new DataTable();
-           da.Fill(dt);
-           con.Close();
-           return dt;
-       }   
+            }
+            catch (Exception e)
+            {
+                if (e.Source != null)
+                    Console.WriteLine("IOException source: {0}", e.Source);
+                throw;
+            }
+            return b_MetaEspecifica;
+        }
+
+        public bool Update_MetaEspecificoDeGasto(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto, SqlTransaction TransControlPresupuestal)
+        {
+            bool b_MetaEspecifica;
+
+            try
+            {
+                SqlCommand cmdComand = new SqlCommand("USP_U_SICOP_META_ESPECIFICADEGASTO");
+                cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
+                cmdComand.Connection = TransControlPresupuestal.Connection;
+                cmdComand.Transaction = TransControlPresupuestal;
+                cmdComand.Parameters.Clear();
+
+                cmdComand.Parameters.AddWithValue("@META_VCH_IDMETA", pMetaEspecificoDeGasto.META_VCH_IDMETA);
+                cmdComand.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO);
+                cmdComand.Parameters.AddWithValue("@MEGA_DEC_PIM", pMetaEspecificoDeGasto.MEGA_DEC_PIM);
+                cmdComand.Parameters.AddWithValue("@MEGA_VCH_ANIO", pMetaEspecificoDeGasto.MEGA_VCH_ANIO);
+                b_MetaEspecifica = cmdComand.ExecuteNonQuery() > 0;
+
+            }
+            catch (Exception e)
+            {
+                if (e.Source != null)
+                    Console.WriteLine("IOException source: {0}", e.Source);
+                throw;
+            }
+            return b_MetaEspecifica;
+        }
+        
+        public DataTable List_MetaEspecificaDeGasto(string idMenta)
+        {
+            DataTable mDtMetaEspecificaDeGasto = new DataTable();
+            try
+            {
+                using (SqlConnection sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion))
+                {
+
+                    SqlCommand cmdComand = new SqlCommand("USP_S_SICOP_META_ESPECIFICADEGASTO_REPORT", sqlConection);
+                    cmdComand.CommandType = CommandType.StoredProcedure;
+                    cmdComand.Parameters.AddWithValue("@_META_VCH_IDMETA", idMenta);
+                    sqlConection.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmdComand);
+                    da.Fill(mDtMetaEspecificaDeGasto);
+                    return mDtMetaEspecificaDeGasto;
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.Source != null)
+                    Console.WriteLine("IOException source: {0}", e.Source);
+                throw;
+            }
+            return mDtMetaEspecificaDeGasto;
+        }
     }
 }

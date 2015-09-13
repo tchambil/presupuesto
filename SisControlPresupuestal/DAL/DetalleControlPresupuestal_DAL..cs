@@ -61,6 +61,7 @@ namespace DAL
             }
             return b_DetalleControlPresupuestal;
         }
+
         public DataTable List_DetalleControlPresupuestal(int inIdControlPresupuestal)
         {
             DataTable mDtDetalleControlPresupuestal = new DataTable();

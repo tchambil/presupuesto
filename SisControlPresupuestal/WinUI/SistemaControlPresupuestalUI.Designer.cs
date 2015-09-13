@@ -63,12 +63,13 @@
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvDetalleControlPresupuestal = new System.Windows.Forms.DataGridView();
+            this.colMeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtId = new System.Windows.Forms.TextBox();
-            this.colMeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvControlPresupuestal)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -378,7 +379,7 @@
             this.groupBox4.Size = new System.Drawing.Size(497, 169);
             this.groupBox4.TabIndex = 65;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "C/P ";
+            this.groupBox4.Text = "Ejecución";
             // 
             // label15
             // 
@@ -433,6 +434,19 @@
             this.dgvDetalleControlPresupuestal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMeta_CellContentClick);
             this.dgvDetalleControlPresupuestal.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvMeta_CellValidating);
             // 
+            // colMeta
+            // 
+            this.colMeta.DataPropertyName = "META_VCH_IDMETA";
+            this.colMeta.HeaderText = "Meta";
+            this.colMeta.Name = "colMeta";
+            this.colMeta.ReadOnly = true;
+            // 
+            // colImporte
+            // 
+            this.colImporte.DataPropertyName = "DCPR_DEC_IMPORTE";
+            this.colImporte.HeaderText = "Importe";
+            this.colImporte.Name = "colImporte";
+            // 
             // label5
             // 
             this.label5.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -474,24 +488,22 @@
             this.txtId.Size = new System.Drawing.Size(53, 20);
             this.txtId.TabIndex = 68;
             // 
-            // colMeta
+            // button1
             // 
-            this.colMeta.DataPropertyName = "META_VCH_IDMETA";
-            this.colMeta.HeaderText = "Meta";
-            this.colMeta.Name = "colMeta";
-            this.colMeta.ReadOnly = true;
-            // 
-            // colImporte
-            // 
-            this.colImporte.DataPropertyName = "DCPR_DEC_IMPORTE";
-            this.colImporte.HeaderText = "Importe";
-            this.colImporte.Name = "colImporte";
+            this.button1.Location = new System.Drawing.Point(212, 176);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(45, 23);
+            this.button1.TabIndex = 69;
+            this.button1.Text = "Ver...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // SistemaControlPresupuestalUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1327, 631);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -564,5 +576,6 @@
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMeta;
         private System.Windows.Forms.DataGridViewTextBoxColumn colImporte;
+        private System.Windows.Forms.Button button1;
     }
 }

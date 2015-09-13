@@ -10,12 +10,13 @@ namespace BUS
 {
     public class DetalleControlPresupuestal_BUS
     {
-        public DataTable List_DetalleControlPresupuestal(int inIdControlPresupuestal)
+        public DataTable List_DetalleControlPresupuestal(int inIdControlPresupuestal )
         {
             DataTable mDtDetalleControlPresupuestal = new DataTable();
             try
             {
                 mDtDetalleControlPresupuestal = new DetalleControlPresupuestal_DAL().List_DetalleControlPresupuestal(inIdControlPresupuestal);
+                   
             }
             catch (Exception ex) { throw ex; }
             return mDtDetalleControlPresupuestal;

@@ -6,20 +6,112 @@ using System.Threading.Tasks;
 using DAL;
 using VO;
 using System.Data;
-
+using System.Data.SqlClient;
 
 namespace BUS
 {
     public class MetaEspecificoDeGasto_BUS
     {
-        public void AgregarMetaEspecificaDeGasto(MetaEspecificoDeGasto_VO metespec)
+        public bool Insert_MetaEspecificoDeGasto(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto )
         {
-            DAMetaEspecificoDeGasto metespDAL = new DAMetaEspecificoDeGasto();
-            metespDAL.AgregarMetaEspecificaDeGasto(metespec);
+            SqlConnection sqlConection = null;
+            SqlTransaction TransMetaEspecifica = null;
+            bool b_MetaEspecifica = false;
+       
+            try
+            {
+                sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion);
+                sqlConection.Open();
+                TransMetaEspecifica = sqlConection.BeginTransaction();
+                if (pMetaEspecificoDeGasto != null)
+                {
+                    b_MetaEspecifica = new MetaEspecificoDeGasto_DAL().Insert_MetaEspecificoDeGasto(pMetaEspecificoDeGasto, TransMetaEspecifica);
+                
+ 
+                }
+                if (b_MetaEspecifica)
+                {
+                    TransMetaEspecifica.Commit();
+
+                }
+                else
+                {
+                    TransMetaEspecifica.Rollback();
+                }
+            }
+
+            catch (Exception exception)
+            {
+                if (TransMetaEspecifica != null)
+                    TransMetaEspecifica.Rollback();
+                return false;
+            }
+            finally
+            {
+                if (sqlConection != null)
+                {
+                    sqlConection.Close();
+                }
+                sqlConection.Dispose();
+
+            }
+            return b_MetaEspecifica;
         }
-        public DataTable BusquedaDeMetaEspecificaDeGasto(string META_VCH_IDMETA)
+        public bool Update_MetaEspecificoDeGasto(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto)
         {
-            return new DAMetaEspecificoDeGasto().BusquedaDeMetaEspecificaDeGasto(META_VCH_IDMETA);
+            SqlConnection sqlConection = null;
+            SqlTransaction TransMetaEspecifica = null;
+            bool b_MetaEspecifica = false;
+
+            try
+            {
+                sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion);
+                sqlConection.Open();
+                TransMetaEspecifica = sqlConection.BeginTransaction();
+                if (pMetaEspecificoDeGasto != null)
+                {
+                    b_MetaEspecifica = new MetaEspecificoDeGasto_DAL().Update_MetaEspecificoDeGasto(pMetaEspecificoDeGasto, TransMetaEspecifica);
+
+
+                }
+                if (b_MetaEspecifica)
+                {
+                    TransMetaEspecifica.Commit();
+
+                }
+                else
+                {
+                    TransMetaEspecifica.Rollback();
+                }
+            }
+
+            catch (Exception exception)
+            {
+                if (TransMetaEspecifica != null)
+                    TransMetaEspecifica.Rollback();
+                return false;
+            }
+            finally
+            {
+                if (sqlConection != null)
+                {
+                    sqlConection.Close();
+                }
+                sqlConection.Dispose();
+
+            }
+            return b_MetaEspecifica;
+        }
+        public DataTable List_MetaEspecificaDeGasto(String idMeta)
+        {
+            DataTable mDtMetaEspecificaDeGasto = new DataTable();
+            try
+            {
+                mDtMetaEspecificaDeGasto = new MetaEspecificoDeGasto_DAL().List_MetaEspecificaDeGasto(idMeta);
+
+            }
+            catch (Exception ex) { throw ex; }
+            return mDtMetaEspecificaDeGasto;
         }
     }
 }

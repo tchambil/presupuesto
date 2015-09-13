@@ -25,227 +25,193 @@ namespace WinUI
         List<Button> listBotones;
         private void DetalleEjecucionDevengadosUI_Load(object sender, EventArgs e)
         {
-            txtID.Text = var.ToString();
             listBotones = new List<Button>() { btnNuevo, btnGuardar, btnModificar, btnCancelar };
-            dgvDetalleDevengados.DefaultCellStyle.ForeColor = Color.Black;
+            dgvGastoEspecifico.DefaultCellStyle.ForeColor = Color.Black;
             WinForm.BloquearTextBox(this);
-          //  WinForm.LimpiarTextBox(this);
-            DatosTabla();    
+            prcList_Meta();
+            prcCargarCbEspecificasDeGasto();
+            prcList_MetaEspecificoDeGasto();
+           
 
             Botones.EstablecerEstadoBotones(listBotones, true);
-            List<int> listaColumnas = new List<int>() { 15, 17 };
-            Grilla.EsconderColumnas(dgvDetalleDevengados, listaColumnas);
-
-            string[] cabeceras = { "", "","PIM", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO","SET","OCT","NOV","DIC","Total","Saldo" };
-            Grilla.PonerCabeceraAGrid(dgvDetalleDevengados, cabeceras);
+       
+       
         }
-        private void DatosTabla()
+        private void prcCargarCbEspecificasDeGasto()
         {
-            DetalleControlPresupuestal_BUS deven = new DetalleControlPresupuestal_BUS();
-            //dgvDetalleDevengados.DataSource = deven.VerDetalleControlPresupuestal(txtID.Text);
-        //    dgvDatos.DataSource = dat.BusquedaDeDatosDePlanilla(txtID.Text);
 
+            DataTable mDtEspecificoDeGasto = new BUS.EspecificoDeGasto_BUS().getEspecificasDeGastos();
+            
+            if (mDtEspecificoDeGasto != null)
+            {
+                this.cmbEspecifica.DataSource = mDtEspecificoDeGasto;
+                this.cmbEspecifica.DisplayMember = "EGAS_VCH_IDESPECIFICADEGASTO";
+                this.cmbEspecifica.ValueMember = "EGAS_VCH_IDESPECIFICADEGASTO";
+                this.cmbEspecifica.SelectedIndex = -1;
+            }
+
+        }
+        private void prcList_MetaEspecificoDeGasto()
+        {
+
+            DataTable mDtMetaEspecificoDeGasto = new BUS.MetaEspecificoDeGasto_BUS().List_MetaEspecificaDeGasto( this.cmbMetas.SelectedValue.ToString());
+            if (mDtMetaEspecificoDeGasto != null)
+            {
+                this.dgvGastoEspecifico.DataSource = null;
+                this.dgvGastoEspecifico.DataSource = mDtMetaEspecificoDeGasto;
+                this.dgvGastoEspecifico.Update();
+            }
+        }
+        private void prcList_MetaEspecificoDeGastoModificado()
+        {
+            MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
+            DataTable mDtMetaEspecificoDeGastoModificado = new BUS.MetaEspecificoDeGastoModificado_BUS().List_MetaEspecificaDeGastoModificado(prcGetMetaEspecificoDeGasto());
+            if (mDtMetaEspecificoDeGastoModificado != null)
+            {
+                this.dgvModificado.DataSource = null;
+                this.dgvModificado.DataSource = mDtMetaEspecificoDeGastoModificado;
+                this.dgvModificado.Update();
+            }
+        }
+        private void prcList_Meta()
+        {
+
+            DataTable mDtMeta = new BUS.Meta_BUS().getMeta();
+            if (mDtMeta != null)
+            {
+                this.cmbMetas.DataSource = null;
+                this.cmbMetas.DataSource = mDtMeta;
+
+                this.cmbMetas.DisplayMember = "META_VCH_IDMETA";
+                this.cmbMetas.ValueMember = "META_VCH_IDMETA";
+                this.cmbMetas.SelectedIndex = 1;
+                this.cmbMetas.Update();
+            }
         }
         private void CalculoTotal()
         {
-            foreach(DataGridViewRow item in dgvDetalleDevengados.Rows)
+            foreach(DataGridViewRow item in dgvGastoEspecifico.Rows)
             {
                 int n = item.Index;
-                dgvDetalleDevengados.Rows[n].Cells[15].Value =
-                (Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[3].Value.ToString()) + 
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[4].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[5].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[6].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[7].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[8].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[9].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[10].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[11].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[12].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[13].Value.ToString()) +
-                Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[14].Value.ToString()) 
+                dgvGastoEspecifico.Rows[n].Cells[15].Value =
+                (Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[3].Value.ToString()) + 
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[4].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[5].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[6].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[7].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[8].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[9].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[10].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[11].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[12].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[13].Value.ToString()) +
+                Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[14].Value.ToString()) 
                 ).ToString();
             }
             txtTotal.Text = "0";
-            foreach (DataGridViewRow item in dgvDetalleDevengados.Rows)
+            foreach (DataGridViewRow item in dgvGastoEspecifico.Rows)
             {
                 int n = item.Index;
 
                 txtTotal.Text = (Decimal.Parse(txtTotal.Text.ToString())
-                    + Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[15].Value.ToString())).ToString();
+                    + Decimal.Parse(dgvGastoEspecifico.Rows[n].Cells[15].Value.ToString())).ToString();
             }
         }
         private void CalculoSaldo()
         {
-            txtSaldo.Text = "0";
-            foreach (DataGridViewRow item in dgvDetalleDevengados.Rows)
+            
+            foreach (DataGridViewRow item in dgvGastoEspecifico.Rows)
             {
                 int n = item.Index;
-
-                txtSaldo.Text = (Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[2].Value.ToString()) - Decimal.Parse(txtTotal.Text.ToString())).ToString();
-                dgvDetalleDevengados.Rows[n].Cells[16].Value = txtSaldo.Text;
+ 
             }
         }
         #region Calculos Pasados
-    
-        //private void CalculoSaldo()
-        //{
-        //    foreach (DataGridViewRow item in dgvDetalleDevengados.Rows)
-        //    {
-        //        int n = item.Index;
-        //        txtTotal.Text = (Decimal.Parse(txtTotal.Text.ToString())
-        //            + Decimal.Parse(dgvDetalleDevengados.Rows[n].Cells[14].Value.ToString())).ToString();
-        //    }
-        //}
-        //private void CalculoTotalDevengados()
-        //{
-        //    //int i = this.dgvDevengados.RowCount; 
-        //    //decimal sum=0;
-        //    //for (i = 1; i < dgvDevengados.RowCount; i++)
-        //    //{
-        //    //    sum += Convert.ToDecimal(dgvDevengados.Rows[i].Cells[7].Value.ToString());
-        //    //}
-        //    decimal sumatoria = 0;
-        //    foreach (DataGridViewRow row in dgvDetalleDevengados.Rows)
-        //    {
-        //        sumatoria += Convert.ToDecimal(row.Cells["Enero"].Value) + Convert.ToDecimal(row.Cells["Febrero"].Value);
-        //    }
-        //    txtTotal.Text = Convert.ToString(sumatoria);
-        //}
-        //private void CalculoDeSaldo()
-        //{
-        //    decimal totdeven = Convert.ToDecimal(txtTotal.Text);
-        //    decimal pim = Convert.ToDecimal(txtPIM.Text);
-        //    decimal saldo = 0;
-        //    saldo = pim - totdeven;
-        //    txtSaldo.Text = Convert.ToString(saldo);
-        //}
+     
         #endregion 
-        private void CalculoPIM()
-        {
-            if ((rbtnAumentar.Checked == true) && (rbtnDisminuir.Checked == false))
-            {
-                decimal suma = Convert.ToDecimal(txtPIM.Text);
-                suma += Convert.ToDecimal(txtAumentar.Text);
-              //  MessageBox.Show("Presupuesto Inicial ¡Actualizado! igual a " + suma);
-                txtPIM.Text = suma.ToString();
-            }
-            else if ((rbtnDisminuir.Checked == true) && (rbtnAumentar.Checked == false))
-            {
-                decimal resta = Convert.ToDecimal(txtPIM.Text); ;
-                resta -= Convert.ToDecimal(txtDisminuir.Text);
-              //  MessageBox.Show("Presupuesto Inicial ¡Actualizado! igual a " + resta);
-                txtPIM.Text = resta.ToString();
-            }
-        }
-        //private void SeleccionarFila()
-        //{
-        //    // cbUsuarios.SelectedIndex = cbUsuarios.FindStringExact(dgvPlanillas[1, dgvPlanillas.CurrentRow.Index].Value.ToString());
-        //    //var = Convert.ToInt32(dgvPlanillas[0, dgvPlanillas.CurrentRow.Index].Value.ToString());
-        //    //lblID.Text = var.ToString();
-        //    ///////////////////////////////////////////////////////////////////////////////////////////////
-        //    txtIdDevengado.Text = dgvDetalleDevengados[1, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtPIM.Text = dgvDetalleDevengados[2, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtEnero.Text = dgvDetalleDevengados[3, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtFebrero.Text = dgvDetalleDevengados[4, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtMarzo.Text = dgvDetalleDevengados[5, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtAbril.Text = dgvDetalleDevengados[6, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtMayo.Text = dgvDetalleDevengados[7, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtJunio.Text = dgvDetalleDevengados[8, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtJulio.Text = dgvDetalleDevengados[9, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtAgosto.Text = dgvDetalleDevengados[10, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtSetiembre.Text = dgvDetalleDevengados[11, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtOctubre.Text = dgvDetalleDevengados[12, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtNoviembre.Text = dgvDetalleDevengados[13, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtDiciembre.Text = dgvDetalleDevengados[14, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtTotal.Text = dgvDetalleDevengados[15, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-        //    txtSaldo.Text = dgvDetalleDevengados[16, dgvDetalleDevengados.CurrentRow.Index].Value.ToString();
-
-        //}
-        //private void AgregarDetalleDevengado()
-        //{
-        //    DetalleControlPresupuestalVO detdevengado = new DetalleControlPresupuestalVO();
-        ////    detdevengado.IdDevengados = var;
-        //    detdevengado.Pim = Convert.ToDecimal(txtPIM.Text);
-        //    detdevengado.Enero = Convert.ToDecimal(txtEnero.Text);
-        //    detdevengado.Febrero = Convert.ToDecimal(txtFebrero.Text);
-        //    detdevengado.Marzo = Convert.ToDecimal(txtMarzo.Text);
-        //    detdevengado.Abril = Convert.ToDecimal(txtAbril.Text);
-        //    detdevengado.Mayo = Convert.ToDecimal(txtMayo.Text);
-        //    detdevengado.Junio = Convert.ToDecimal(txtJunio.Text);
-        //    detdevengado.Julio = Convert.ToDecimal(txtJulio.Text);
-        //    detdevengado.Agosto = Convert.ToDecimal(txtAgosto.Text);
-        //    detdevengado.Setiembre = Convert.ToDecimal(txtSetiembre.Text);
-        //    detdevengado.Octubre = Convert.ToDecimal(txtOctubre.Text);
-        //    detdevengado.Noviembre = Convert.ToDecimal(txtNoviembre.Text);
-        //    detdevengado.Diciembre = Convert.ToDecimal(txtDiciembre.Text);
-        //    detdevengado.TotalDevengados = Convert.ToDecimal(txtTotal.Text);
-        //    detdevengado.Saldo = Convert.ToDecimal(txtSaldo.Text);
-
-        //    DetalleControlPresupuestalBUS detdevenBUS = new DetalleControlPresupuestalBUS();
-        //    detdevenBUS.AgregarDetalleDevengado(detdevengado);
-
-        //    MessageBox.Show("Se ha agregado un Nuevo Detalle...");
-        //}
-        //private void ModificarDetalleDevengado()
-        //{
-        //    DetalleControlPresupuestalVO detdevengado = new DetalleControlPresupuestalVO();
-
-        //    detdevengado.IdDetalleDevengados = Convert.ToInt32(dgvDetalleDevengados.SelectedRows[0].Cells[0].Value);
-        //    detdevengado.IdDevengados = Convert.ToInt32(txtID.Text);
-        //    detdevengado.Pim = Convert.ToDecimal(txtPIM.Text);
-        //    detdevengado.Enero = Convert.ToDecimal(txtEnero.Text);
-        //    detdevengado.Febrero = Convert.ToDecimal(txtFebrero.Text);
-        //    detdevengado.Marzo = Convert.ToDecimal(txtMarzo.Text);
-        //    detdevengado.Abril = Convert.ToDecimal(txtAbril.Text);
-        //    detdevengado.Mayo = Convert.ToDecimal(txtMayo.Text);
-        //    detdevengado.Junio = Convert.ToDecimal(txtJunio.Text);
-        //    detdevengado.Julio = Convert.ToDecimal(txtJulio.Text);
-        //    detdevengado.Agosto = Convert.ToDecimal(txtAgosto.Text);
-        //    detdevengado.Setiembre = Convert.ToDecimal(txtSetiembre.Text);
-        //    detdevengado.Octubre = Convert.ToDecimal(txtOctubre.Text);
-        //    detdevengado.Noviembre = Convert.ToDecimal(txtNoviembre.Text);
-        //    detdevengado.Diciembre = Convert.ToDecimal(txtDiciembre.Text);
-        //    detdevengado.TotalDevengados = Convert.ToDecimal(txtTotal.Text);
-        //    detdevengado.Saldo = Convert.ToDecimal(txtSaldo.Text);
-
-        //    DetalleControlPresupuestalBUS devenBUS = new DetalleControlPresupuestalBUS();
-        //    devenBUS.ModificarDetalleDevengado(detdevengado);
-
-        //    MessageBox.Show("Se ha modificado la Especificación de Gasto...");
-        //}
+       
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             Nuevo = true;
-            rbtnAumentar.Enabled = false;
-            rbtnDisminuir.Enabled = false;
-            txtAumentar.ReadOnly = true;
-            txtDisminuir.ReadOnly = true;
-            txtSaldo.Text = "";
-            txtTotal.Text = "";
+          
            // WinForm.LimpiarTextBox(this);
             WinForm.DesbloquearTextBox(this);
             Botones.EstablecerEstadoBotones(listBotones, false);
             
         }
+        private MetaEspecificoDeGasto_VO prcGetMetaEspecificoDeGasto()
+        {
+            MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
 
+            pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = this.cmbEspecifica.SelectedValue.ToString();
+            pMetaEspecificoDeGasto.MEGA_VCH_ANIO = this.txtAnio.Text.ToString();
+            pMetaEspecificoDeGasto.META_VCH_IDMETA = this.cmbMetas.SelectedValue.ToString();
+            pMetaEspecificoDeGasto.MEGA_DEC_PIM = Convert.ToDecimal(this.txtpim.Text);
+
+
+            return pMetaEspecificoDeGasto;
+        }
+        private MetaEspecificoDeGastoModificado_VO prcGetMetaEspecificoDeGastoModificado()
+        {
+            MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
+            pMetaEspecificoDeGastoModificado.EGAS_VCH_IDESPECIFICADEGASTO = this.cmbEspecifica.SelectedValue.ToString();
+            pMetaEspecificoDeGastoModificado.META_VCH_IDMETA = this.cmbMetas.SelectedValue.ToString();
+            pMetaEspecificoDeGastoModificado.MEGM_DEC_PIMMODIFICADO = Convert.ToDecimal(this.txtPIModificado.ToString());
+            return pMetaEspecificoDeGastoModificado;
+        }
+        private void prcSeleccionarFilaMetaEspefica()
+        {
+                txtAnio.Text = dgvGastoEspecifico["colAnio", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+                cmbMetas.SelectedValue = dgvGastoEspecifico["colIdMeta", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+                cmbEspecifica.SelectedValue = dgvGastoEspecifico["colEspecificaGasto", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+                txtpim.Text = dgvGastoEspecifico["colPIM", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+                 prcList_MetaEspecificoDeGastoModificado();
+            
+        }
+        private void prcSeleccionarFilaMetaEspeficaModifica()
+        {
+            txtPIModificado.Text = dgvGastoEspecifico["colAnio", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();         
+
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Nuevo == true)
-            {
 
-              //  AgregarDetalleDevengado();
-                CalculoTotal();
-                WinForm.BloquearTextBox(this);
-                DatosTabla();
-                Botones.EstablecerEstadoBotones(listBotones, true);
-            }
-            else
+
+            if (MessageBox.Show("¿Guardar el Registro?", "Meta EspecificoDeGasto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-               // ModificarDetalleDevengado();
-                WinForm.BloquearTextBox(this);
-                DatosTabla();
-                Botones.EstablecerEstadoBotones(listBotones, true);
+                MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
+                pMetaEspecificoDeGasto = this.prcGetMetaEspecificoDeGasto();
+  
+                if (Nuevo == true)
+                {
+                    if (new MetaEspecificoDeGasto_BUS().Insert_MetaEspecificoDeGasto(pMetaEspecificoDeGasto))
+                    {
+                       
+                        WinForm.BloquearTextBox(this);
+                        prcList_MetaEspecificoDeGasto();
+                      
+                        Botones.EstablecerEstadoBotones(listBotones, true);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al guardar Registro");
+                    }
+
+                }
+                else
+                {
+
+                    if (new MetaEspecificoDeGasto_BUS().Update_MetaEspecificoDeGasto(pMetaEspecificoDeGasto))
+                    {
+                        WinForm.BloquearTextBox(this);
+                        prcList_MetaEspecificoDeGasto();
+                        Botones.EstablecerEstadoBotones(listBotones, true);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al guardar Registro");
+                    }
+                }
             }
         }
 
@@ -271,9 +237,9 @@ namespace WinUI
             this.Close();
         }
 
-        private void dgvDetalleDevengados_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvGastoEspecifico_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-          //  SeleccionarFila();
+            prcSeleccionarFilaMetaEspefica();
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -282,6 +248,50 @@ namespace WinUI
             CalculoSaldo();
         }
 
-      
+        private void btnGuardarModifica_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("¿Guardar el Registro?", "Modificaciones", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            {
+                MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
+                pMetaEspecificoDeGastoModificado = this.prcGetMetaEspecificoDeGastoModificado();
+
+                if (Nuevo == true)
+                {
+                    if (new MetaEspecificoDeGastoModificado_BUS().Insert_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
+                    {
+
+                        WinForm.BloquearTextBox(this);
+                        prcList_MetaEspecificoDeGastoModificado();
+
+                        Botones.EstablecerEstadoBotones(listBotones, true);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al guardar Registro");
+                    }
+
+                }
+                else
+                {
+
+                    if (new MetaEspecificoDeGastoModificado_BUS().Update_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
+                    {
+                        WinForm.BloquearTextBox(this);
+                        prcList_MetaEspecificoDeGastoModificado();
+                        Botones.EstablecerEstadoBotones(listBotones, true);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al guardar Registro");
+                    }
+                }
+            }
+        }
+
+        private void txtPIModificado_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -28,104 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtAumentar = new System.Windows.Forms.TextBox();
-            this.txtDisminuir = new System.Windows.Forms.TextBox();
-            this.rbtnDisminuir = new System.Windows.Forms.RadioButton();
-            this.txtPIM = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.rbtnAumentar = new System.Windows.Forms.RadioButton();
-            this.dgvDetalleDevengados = new System.Windows.Forms.DataGridView();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
-            this.btnVolver = new System.Windows.Forms.Button();
             this.btnCalcular = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.cmbMetas = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtAnio = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dgvGastoEspecifico = new System.Windows.Forms.DataGridView();
+            this.colAnio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIdMeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEspecificaGasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPIM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModifiacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPresupuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEnero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFebrero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMarzo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAbril = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMayo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colJunio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colJulio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAgosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSetiembre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOctubre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNoviembre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDiciembre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEjecutado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSaldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbEspecifica = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtpim = new System.Windows.Forms.TextBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
-            this.txtSaldo = new System.Windows.Forms.TextBox();
-            this.txtID = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleDevengados)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtPIModificado = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnCancelarModifica = new System.Windows.Forms.Button();
+            this.btnModificarModifica = new System.Windows.Forms.Button();
+            this.btnGuardarModifica = new System.Windows.Forms.Button();
+            this.btnNuevoModifica = new System.Windows.Forms.Button();
+            this.dgvModificado = new System.Windows.Forms.DataGridView();
+            this.colidMetaModificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIdEspecificaModificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colImporteModificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGastoEspecifico)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificado)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtAumentar
-            // 
-            this.txtAumentar.Location = new System.Drawing.Point(468, 114);
-            this.txtAumentar.Name = "txtAumentar";
-            this.txtAumentar.Size = new System.Drawing.Size(57, 20);
-            this.txtAumentar.TabIndex = 38;
-            // 
-            // txtDisminuir
-            // 
-            this.txtDisminuir.Location = new System.Drawing.Point(468, 137);
-            this.txtDisminuir.Name = "txtDisminuir";
-            this.txtDisminuir.Size = new System.Drawing.Size(57, 20);
-            this.txtDisminuir.TabIndex = 37;
-            // 
-            // rbtnDisminuir
-            // 
-            this.rbtnDisminuir.AutoSize = true;
-            this.rbtnDisminuir.Location = new System.Drawing.Point(395, 141);
-            this.rbtnDisminuir.Name = "rbtnDisminuir";
-            this.rbtnDisminuir.Size = new System.Drawing.Size(67, 17);
-            this.rbtnDisminuir.TabIndex = 36;
-            this.rbtnDisminuir.TabStop = true;
-            this.rbtnDisminuir.Text = "Disminuir";
-            this.rbtnDisminuir.UseVisualStyleBackColor = true;
-            // 
-            // txtPIM
-            // 
-            this.txtPIM.Location = new System.Drawing.Point(450, 82);
-            this.txtPIM.Name = "txtPIM";
-            this.txtPIM.Size = new System.Drawing.Size(75, 20);
-            this.txtPIM.TabIndex = 34;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(408, 85);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "PIM:";
-            // 
-            // rbtnAumentar
-            // 
-            this.rbtnAumentar.AutoSize = true;
-            this.rbtnAumentar.Location = new System.Drawing.Point(395, 116);
-            this.rbtnAumentar.Name = "rbtnAumentar";
-            this.rbtnAumentar.Size = new System.Drawing.Size(70, 17);
-            this.rbtnAumentar.TabIndex = 45;
-            this.rbtnAumentar.TabStop = true;
-            this.rbtnAumentar.Text = "Aumentar";
-            this.rbtnAumentar.UseVisualStyleBackColor = true;
-            // 
-            // dgvDetalleDevengados
-            // 
-            this.dgvDetalleDevengados.AllowUserToAddRows = false;
-            this.dgvDetalleDevengados.AllowUserToDeleteRows = false;
-            this.dgvDetalleDevengados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvDetalleDevengados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalleDevengados.Location = new System.Drawing.Point(17, 230);
-            this.dgvDetalleDevengados.Name = "dgvDetalleDevengados";
-            this.dgvDetalleDevengados.ReadOnly = true;
-            this.dgvDetalleDevengados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalleDevengados.Size = new System.Drawing.Size(900, 143);
-            this.dgvDetalleDevengados.TabIndex = 46;
-            this.dgvDetalleDevengados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleDevengados_CellClick);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(514, 180);
+            this.btnCancelar.Location = new System.Drawing.Point(690, 89);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 74;
@@ -135,7 +102,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(432, 179);
+            this.btnModificar.Location = new System.Drawing.Point(609, 89);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 73;
@@ -145,7 +112,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(350, 180);
+            this.btnGuardar.Location = new System.Drawing.Point(528, 89);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 71;
@@ -155,7 +122,7 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new System.Drawing.Point(269, 180);
+            this.btnNuevo.Location = new System.Drawing.Point(447, 89);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(75, 23);
             this.btnNuevo.TabIndex = 72;
@@ -163,25 +130,9 @@
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
-            // btnVolver
-            // 
-            this.btnVolver.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVolver.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnVolver.FlatAppearance.BorderSize = 0;
-            this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVolver.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnVolver.Image = global::WinUI.Properties.Resources.Boton_Retroceder1;
-            this.btnVolver.Location = new System.Drawing.Point(-1, -3);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(50, 48);
-            this.btnVolver.TabIndex = 81;
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
             // btnCalcular
             // 
-            this.btnCalcular.Location = new System.Drawing.Point(595, 179);
+            this.btnCalcular.Location = new System.Drawing.Point(771, 89);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(75, 23);
             this.btnCalcular.TabIndex = 82;
@@ -189,161 +140,560 @@
             this.btnCalcular.UseVisualStyleBackColor = true;
             this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 204);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 86;
-            this.label1.Text = "META 0034";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 568);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 87;
-            this.label2.Text = "META 0063";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 389);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 13);
-            this.label3.TabIndex = 88;
-            this.label3.Text = "META 0062";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 415);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(895, 138);
-            this.dataGridView1.TabIndex = 89;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(17, 594);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(895, 127);
-            this.dataGridView2.TabIndex = 90;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(400, 63);
+            this.label13.Location = new System.Drawing.Point(229, 20);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.Size = new System.Drawing.Size(36, 13);
             this.label13.TabIndex = 92;
-            this.label13.Text = "Metas:";
+            this.label13.Text = "Metas";
             // 
             // cmbMetas
             // 
+            this.cmbMetas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMetas.FormattingEnabled = true;
-            this.cmbMetas.Location = new System.Drawing.Point(450, 55);
+            this.cmbMetas.Location = new System.Drawing.Point(284, 14);
             this.cmbMetas.Name = "cmbMetas";
-            this.cmbMetas.Size = new System.Drawing.Size(75, 21);
+            this.cmbMetas.Size = new System.Drawing.Size(90, 21);
             this.cmbMetas.TabIndex = 91;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(319, 15);
+            this.label5.Location = new System.Drawing.Point(363, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(297, 13);
             this.label5.TabIndex = 93;
             this.label5.Text = "FORMULARIO - DETALLE DE CONTROL PRESUPUESTAL";
             // 
+            // txtAnio
+            // 
+            this.txtAnio.Location = new System.Drawing.Point(103, 15);
+            this.txtAnio.Name = "txtAnio";
+            this.txtAnio.Size = new System.Drawing.Size(90, 20);
+            this.txtAnio.TabIndex = 97;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 23);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 13);
+            this.label6.TabIndex = 98;
+            this.label6.Text = "Año ";
+            // 
+            // dgvGastoEspecifico
+            // 
+            this.dgvGastoEspecifico.AllowUserToAddRows = false;
+            this.dgvGastoEspecifico.AllowUserToDeleteRows = false;
+            this.dgvGastoEspecifico.AllowUserToResizeColumns = false;
+            this.dgvGastoEspecifico.AllowUserToResizeRows = false;
+            this.dgvGastoEspecifico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGastoEspecifico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colAnio,
+            this.colIdMeta,
+            this.colEspecificaGasto,
+            this.colPIM,
+            this.colModifiacion,
+            this.colPresupuesto,
+            this.colEnero,
+            this.colFebrero,
+            this.colMarzo,
+            this.colAbril,
+            this.colMayo,
+            this.colJunio,
+            this.colJulio,
+            this.colAgosto,
+            this.colSetiembre,
+            this.colOctubre,
+            this.colNoviembre,
+            this.colDiciembre,
+            this.colEjecutado,
+            this.colSaldo});
+            this.dgvGastoEspecifico.Location = new System.Drawing.Point(6, 6);
+            this.dgvGastoEspecifico.Name = "dgvGastoEspecifico";
+            this.dgvGastoEspecifico.ReadOnly = true;
+            this.dgvGastoEspecifico.RowHeadersVisible = false;
+            this.dgvGastoEspecifico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGastoEspecifico.Size = new System.Drawing.Size(1238, 443);
+            this.dgvGastoEspecifico.TabIndex = 99;
+            this.dgvGastoEspecifico.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGastoEspecifico_CellClick);
+            this.dgvGastoEspecifico.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGastoEspecifico_CellClick);
+            // 
+            // colAnio
+            // 
+            this.colAnio.DataPropertyName = "MEGA_VCH_ANIO";
+            this.colAnio.HeaderText = "Anio";
+            this.colAnio.Name = "colAnio";
+            this.colAnio.ReadOnly = true;
+            this.colAnio.Visible = false;
+            // 
+            // colIdMeta
+            // 
+            this.colIdMeta.DataPropertyName = "META_VCH_IDMETA";
+            this.colIdMeta.HeaderText = "Meta";
+            this.colIdMeta.Name = "colIdMeta";
+            this.colIdMeta.ReadOnly = true;
+            this.colIdMeta.Visible = false;
+            // 
+            // colEspecificaGasto
+            // 
+            this.colEspecificaGasto.DataPropertyName = "EGAS_VCH_IDESPECIFICADEGASTO";
+            this.colEspecificaGasto.HeaderText = "EspecificaGasto";
+            this.colEspecificaGasto.Name = "colEspecificaGasto";
+            this.colEspecificaGasto.ReadOnly = true;
+            this.colEspecificaGasto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colEspecificaGasto.Width = 87;
+            // 
+            // colPIM
+            // 
+            this.colPIM.DataPropertyName = "MEGA_DEC_PIM";
+            this.colPIM.HeaderText = "PIM";
+            this.colPIM.Name = "colPIM";
+            this.colPIM.ReadOnly = true;
+            this.colPIM.Width = 70;
+            // 
+            // colModifiacion
+            // 
+            this.colModifiacion.DataPropertyName = "MEGA_MODIFICACION";
+            this.colModifiacion.HeaderText = "Modificacion";
+            this.colModifiacion.Name = "colModifiacion";
+            this.colModifiacion.ReadOnly = true;
+            this.colModifiacion.Width = 70;
+            // 
+            // colPresupuesto
+            // 
+            this.colPresupuesto.DataPropertyName = "MEGA_PRESUPUESTO";
+            this.colPresupuesto.HeaderText = "Presupuesto";
+            this.colPresupuesto.Name = "colPresupuesto";
+            this.colPresupuesto.ReadOnly = true;
+            this.colPresupuesto.Width = 70;
+            // 
+            // colEnero
+            // 
+            this.colEnero.DataPropertyName = "ENERO";
+            this.colEnero.HeaderText = "Enero";
+            this.colEnero.Name = "colEnero";
+            this.colEnero.ReadOnly = true;
+            this.colEnero.Width = 65;
+            // 
+            // colFebrero
+            // 
+            this.colFebrero.DataPropertyName = "FEBRERO";
+            this.colFebrero.HeaderText = "Febrero";
+            this.colFebrero.Name = "colFebrero";
+            this.colFebrero.ReadOnly = true;
+            this.colFebrero.Width = 65;
+            // 
+            // colMarzo
+            // 
+            this.colMarzo.DataPropertyName = "MARZO";
+            this.colMarzo.HeaderText = "Marzo";
+            this.colMarzo.Name = "colMarzo";
+            this.colMarzo.ReadOnly = true;
+            this.colMarzo.Width = 65;
+            // 
+            // colAbril
+            // 
+            this.colAbril.DataPropertyName = "ABRIL";
+            this.colAbril.HeaderText = "Abril";
+            this.colAbril.Name = "colAbril";
+            this.colAbril.ReadOnly = true;
+            this.colAbril.Width = 65;
+            // 
+            // colMayo
+            // 
+            this.colMayo.DataPropertyName = "MAYO";
+            this.colMayo.HeaderText = "Mayo";
+            this.colMayo.Name = "colMayo";
+            this.colMayo.ReadOnly = true;
+            this.colMayo.Width = 65;
+            // 
+            // colJunio
+            // 
+            this.colJunio.DataPropertyName = "JUNIO";
+            this.colJunio.HeaderText = "Junio";
+            this.colJunio.Name = "colJunio";
+            this.colJunio.ReadOnly = true;
+            this.colJunio.Width = 65;
+            // 
+            // colJulio
+            // 
+            this.colJulio.DataPropertyName = "JULIO";
+            this.colJulio.HeaderText = "Julio";
+            this.colJulio.Name = "colJulio";
+            this.colJulio.ReadOnly = true;
+            this.colJulio.Width = 65;
+            // 
+            // colAgosto
+            // 
+            this.colAgosto.DataPropertyName = "AGOSTO";
+            this.colAgosto.HeaderText = "Agosto";
+            this.colAgosto.Name = "colAgosto";
+            this.colAgosto.ReadOnly = true;
+            this.colAgosto.Width = 65;
+            // 
+            // colSetiembre
+            // 
+            this.colSetiembre.DataPropertyName = "SEPTIEMBRE";
+            this.colSetiembre.HeaderText = "Setiembre";
+            this.colSetiembre.Name = "colSetiembre";
+            this.colSetiembre.ReadOnly = true;
+            this.colSetiembre.Width = 65;
+            // 
+            // colOctubre
+            // 
+            this.colOctubre.DataPropertyName = "OCTUBRE";
+            this.colOctubre.HeaderText = "Octubre";
+            this.colOctubre.Name = "colOctubre";
+            this.colOctubre.ReadOnly = true;
+            this.colOctubre.Width = 65;
+            // 
+            // colNoviembre
+            // 
+            this.colNoviembre.DataPropertyName = "NOVIEMBRE";
+            this.colNoviembre.HeaderText = "Noviembre";
+            this.colNoviembre.Name = "colNoviembre";
+            this.colNoviembre.ReadOnly = true;
+            this.colNoviembre.Width = 65;
+            // 
+            // colDiciembre
+            // 
+            this.colDiciembre.DataPropertyName = "DICIEMBRE";
+            this.colDiciembre.HeaderText = "Diciembre";
+            this.colDiciembre.Name = "colDiciembre";
+            this.colDiciembre.ReadOnly = true;
+            this.colDiciembre.Width = 65;
+            // 
+            // colEjecutado
+            // 
+            this.colEjecutado.DataPropertyName = "TOTALEJECUTADO";
+            this.colEjecutado.HeaderText = "Ejecutado";
+            this.colEjecutado.Name = "colEjecutado";
+            this.colEjecutado.ReadOnly = true;
+            this.colEjecutado.Width = 70;
+            // 
+            // colSaldo
+            // 
+            this.colSaldo.DataPropertyName = "SADOEJERCICIO";
+            this.colSaldo.HeaderText = "Saldo";
+            this.colSaldo.Name = "colSaldo";
+            this.colSaldo.ReadOnly = true;
+            this.colSaldo.Width = 70;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.cmbEspecifica);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtpim);
+            this.groupBox1.Controls.Add(this.cmbMetas);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.txtAnio);
+            this.groupBox1.Location = new System.Drawing.Point(2, 24);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(439, 102);
+            this.groupBox1.TabIndex = 100;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "General";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 102;
+            this.label2.Text = "Especifica Gasto";
+            // 
+            // cmbEspecifica
+            // 
+            this.cmbEspecifica.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEspecifica.FormattingEnabled = true;
+            this.cmbEspecifica.Location = new System.Drawing.Point(103, 41);
+            this.cmbEspecifica.Name = "cmbEspecifica";
+            this.cmbEspecifica.Size = new System.Drawing.Size(90, 21);
+            this.cmbEspecifica.TabIndex = 101;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 100;
+            this.label1.Text = "Importe PIM";
+            // 
+            // txtpim
+            // 
+            this.txtpim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtpim.Location = new System.Drawing.Point(103, 68);
+            this.txtpim.Name = "txtpim";
+            this.txtpim.Size = new System.Drawing.Size(90, 20);
+            this.txtpim.TabIndex = 99;
+            // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(685, 116);
+            this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotal.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtTotal.Location = new System.Drawing.Point(1130, 455);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(57, 20);
-            this.txtTotal.TabIndex = 94;
+            this.txtTotal.Size = new System.Drawing.Size(100, 20);
+            this.txtTotal.TabIndex = 101;
             // 
-            // txtSaldo
+            // tabControl1
             // 
-            this.txtSaldo.Location = new System.Drawing.Point(685, 142);
-            this.txtSaldo.Name = "txtSaldo";
-            this.txtSaldo.Size = new System.Drawing.Size(57, 20);
-            this.txtSaldo.TabIndex = 95;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(2, 132);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1273, 507);
+            this.tabControl1.TabIndex = 102;
             // 
-            // txtID
+            // tabPage1
             // 
-            this.txtID.Location = new System.Drawing.Point(685, 85);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(57, 20);
-            this.txtID.TabIndex = 96;
+            this.tabPage1.Controls.Add(this.dgvGastoEspecifico);
+            this.tabPage1.Controls.Add(this.txtTotal);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1265, 481);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Especifica de Gasto";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.btnCancelarModifica);
+            this.tabPage2.Controls.Add(this.btnModificarModifica);
+            this.tabPage2.Controls.Add(this.btnGuardarModifica);
+            this.tabPage2.Controls.Add(this.btnNuevoModifica);
+            this.tabPage2.Controls.Add(this.dgvModificado);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1265, 481);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Modificaciones";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtPIModificado);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Location = new System.Drawing.Point(6, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(521, 50);
+            this.groupBox2.TabIndex = 109;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Datos ";
+            // 
+            // txtPIModificado
+            // 
+            this.txtPIModificado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPIModificado.Location = new System.Drawing.Point(76, 19);
+            this.txtPIModificado.Name = "txtPIModificado";
+            this.txtPIModificado.Size = new System.Drawing.Size(90, 20);
+            this.txtPIModificado.TabIndex = 101;
+            this.txtPIModificado.TextChanged += new System.EventHandler(this.txtPIModificado_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(192, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.TabIndex = 108;
+            this.label4.Text = "Operación";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(275, 18);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(90, 21);
+            this.comboBox1.TabIndex = 107;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.TabIndex = 102;
+            this.label3.Text = "Importe PIM";
+            // 
+            // btnCancelarModifica
+            // 
+            this.btnCancelarModifica.Location = new System.Drawing.Point(850, 170);
+            this.btnCancelarModifica.Name = "btnCancelarModifica";
+            this.btnCancelarModifica.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelarModifica.TabIndex = 106;
+            this.btnCancelarModifica.Text = "Cancelar";
+            this.btnCancelarModifica.UseVisualStyleBackColor = true;
+            // 
+            // btnModificarModifica
+            // 
+            this.btnModificarModifica.Location = new System.Drawing.Point(850, 141);
+            this.btnModificarModifica.Name = "btnModificarModifica";
+            this.btnModificarModifica.Size = new System.Drawing.Size(75, 23);
+            this.btnModificarModifica.TabIndex = 105;
+            this.btnModificarModifica.Text = "Modificar";
+            this.btnModificarModifica.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardarModifica
+            // 
+            this.btnGuardarModifica.Location = new System.Drawing.Point(850, 112);
+            this.btnGuardarModifica.Name = "btnGuardarModifica";
+            this.btnGuardarModifica.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarModifica.TabIndex = 104;
+            this.btnGuardarModifica.Text = "Guardar";
+            this.btnGuardarModifica.UseVisualStyleBackColor = true;
+            this.btnGuardarModifica.Click += new System.EventHandler(this.btnGuardarModifica_Click);
+            // 
+            // btnNuevoModifica
+            // 
+            this.btnNuevoModifica.Location = new System.Drawing.Point(850, 83);
+            this.btnNuevoModifica.Name = "btnNuevoModifica";
+            this.btnNuevoModifica.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevoModifica.TabIndex = 103;
+            this.btnNuevoModifica.Text = "Nuevo";
+            this.btnNuevoModifica.UseVisualStyleBackColor = true;
+            // 
+            // dgvModificado
+            // 
+            this.dgvModificado.AllowUserToAddRows = false;
+            this.dgvModificado.AllowUserToDeleteRows = false;
+            this.dgvModificado.AllowUserToResizeColumns = false;
+            this.dgvModificado.AllowUserToResizeRows = false;
+            this.dgvModificado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModificado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colidMetaModificado,
+            this.colIdEspecificaModificado,
+            this.colImporteModificado});
+            this.dgvModificado.Location = new System.Drawing.Point(6, 62);
+            this.dgvModificado.Name = "dgvModificado";
+            this.dgvModificado.ReadOnly = true;
+            this.dgvModificado.RowHeadersVisible = false;
+            this.dgvModificado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvModificado.Size = new System.Drawing.Size(138, 342);
+            this.dgvModificado.TabIndex = 0;
+            // 
+            // colidMetaModificado
+            // 
+            this.colidMetaModificado.DataPropertyName = "META_VCH_IDMETA";
+            this.colidMetaModificado.HeaderText = "idMetaModificado";
+            this.colidMetaModificado.Name = "colidMetaModificado";
+            this.colidMetaModificado.ReadOnly = true;
+            this.colidMetaModificado.Visible = false;
+            // 
+            // colIdEspecificaModificado
+            // 
+            this.colIdEspecificaModificado.DataPropertyName = "EGAS_VCH_IDESPECIFICADEGASTO";
+            this.colIdEspecificaModificado.HeaderText = "IdEspecificaModificado";
+            this.colIdEspecificaModificado.Name = "colIdEspecificaModificado";
+            this.colIdEspecificaModificado.ReadOnly = true;
+            this.colIdEspecificaModificado.Visible = false;
+            // 
+            // colImporteModificado
+            // 
+            this.colImporteModificado.DataPropertyName = "MEGM_DEC_PIMMODIFICADO";
+            this.colImporteModificado.HeaderText = "Importe";
+            this.colImporteModificado.Name = "colImporteModificado";
+            this.colImporteModificado.ReadOnly = true;
             // 
             // DetalleControlPresupuestalUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 735);
-            this.Controls.Add(this.txtID);
-            this.Controls.Add(this.txtSaldo);
-            this.Controls.Add(this.txtTotal);
+            this.ClientSize = new System.Drawing.Size(1335, 735);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.cmbMetas);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCalcular);
-            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnNuevo);
-            this.Controls.Add(this.dgvDetalleDevengados);
-            this.Controls.Add(this.rbtnAumentar);
-            this.Controls.Add(this.txtAumentar);
-            this.Controls.Add(this.txtDisminuir);
-            this.Controls.Add(this.rbtnDisminuir);
-            this.Controls.Add(this.txtPIM);
-            this.Controls.Add(this.label4);
             this.Name = "DetalleControlPresupuestalUI";
             this.Text = "Formulario-Detalle de Control Presupuestal";
             this.Load += new System.EventHandler(this.DetalleEjecucionDevengadosUI_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleDevengados)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGastoEspecifico)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtAumentar;
-        private System.Windows.Forms.TextBox txtDisminuir;
-        private System.Windows.Forms.RadioButton rbtnDisminuir;
-        private System.Windows.Forms.TextBox txtPIM;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton rbtnAumentar;
-        private System.Windows.Forms.DataGridView dgvDetalleDevengados;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnNuevo;
-        private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnCalcular;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cmbMetas;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtAnio;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dgvGastoEspecifico;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtTotal;
-        private System.Windows.Forms.TextBox txtSaldo;
-        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbEspecifica;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtpim;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtPIModificado;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnCancelarModifica;
+        private System.Windows.Forms.Button btnModificarModifica;
+        private System.Windows.Forms.Button btnGuardarModifica;
+        private System.Windows.Forms.Button btnNuevoModifica;
+        private System.Windows.Forms.DataGridView dgvModificado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAnio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdMeta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEspecificaGasto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPIM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colModifiacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPresupuesto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEnero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFebrero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarzo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAbril;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMayo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colJunio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colJulio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAgosto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSetiembre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOctubre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNoviembre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDiciembre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEjecutado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSaldo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colidMetaModificado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdEspecificaModificado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colImporteModificado;
     }
 }
