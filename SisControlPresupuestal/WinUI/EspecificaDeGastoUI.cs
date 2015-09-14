@@ -23,17 +23,20 @@ namespace WinUI
         List<Button> listBotones;
         private void EspecificaDeGastoUI_Load(object sender, EventArgs e)
         {
-            listBotones = new List<Button>() { btnNuevo, btnGuardar, btnModificar, btnCancelar };
+            WinForm.pfActiveControl(this,false);
+            prcActiveButton(true, false);
+             DatosTabla();
             dgvPartidasEspecificas.DefaultCellStyle.ForeColor = Color.Black;
-            WinForm.BloquearTextBox(this);
-            WinForm.LimpiarTextBox(this);
-            DatosTabla();
-            // txtBusqueda.Enabled = true;
-            Botones.EstablecerEstadoBotones(listBotones, true);
             List<int> listaColumnas = new List<int>() { 2, 2 };
             Grilla.EsconderColumnas(dgvPartidasEspecificas, listaColumnas);
             string[] cabeceras = { "Partida Específica", "Descripción" };
             Grilla.PonerCabeceraAGrid(dgvPartidasEspecificas, cabeceras);
+        }
+        private void prcActiveButton(bool b_pState,bool b_lMod) {
+            WinForm.pfActiveButon(this, b_pState);
+            this.btnCancelar.Enabled = !b_pState;
+            this.btnGuardar.Enabled = !b_pState;
+            this.btnModificar.Enabled = b_lMod;
         }
         private void DatosTabla()
         {
@@ -74,8 +77,8 @@ namespace WinUI
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             Nuevo = true;
-            WinForm.LimpiarTextBox(this);
-            WinForm.DesbloquearTextBox(this);
+            WinForm.pfCleanTextBox(this);
+            WinForm.pfActiveControl(this,true);
             Botones.EstablecerEstadoBotones(listBotones, false);
         }
 
@@ -84,14 +87,14 @@ namespace WinUI
             if (Nuevo == true)
             {
                 AgregarEspecificaDeGasto();
-                WinForm.BloquearTextBox(this);
+                WinForm.pfActiveButon(this,true);
                 DatosTabla();
                 Botones.EstablecerEstadoBotones(listBotones, true);
             }
             else
             {
                 ModificarEspecificaDeGasto();
-                WinForm.BloquearTextBox(this);
+                WinForm.pfActiveButon(this, true);
                 DatosTabla();
                 Botones.EstablecerEstadoBotones(listBotones, true);
             }
@@ -100,14 +103,14 @@ namespace WinUI
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Nuevo = false;
-            WinForm.DesbloquearTextBox(this);
+            WinForm.pfActiveControl(this,true);
             Botones.EstablecerEstadoBotones(listBotones, false);  
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            WinForm.LimpiarTextBox(this);
-            WinForm.BloquearTextBox(this);
+            WinForm.pfCleanTextBox(this);
+            WinForm.pfActiveButon(this,false);
             Botones.EstablecerEstadoBotones(listBotones, true);
         }
 

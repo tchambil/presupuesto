@@ -168,7 +168,7 @@
             this.cmbDocumentos.FormattingEnabled = true;
             this.cmbDocumentos.Location = new System.Drawing.Point(51, 20);
             this.cmbDocumentos.Name = "cmbDocumentos";
-            this.cmbDocumentos.Size = new System.Drawing.Size(130, 21);
+            this.cmbDocumentos.Size = new System.Drawing.Size(209, 21);
             this.cmbDocumentos.TabIndex = 1;
             // 
             // label9
@@ -219,7 +219,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(187, 23);
+            this.label3.Location = new System.Drawing.Point(281, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 30;
@@ -228,7 +228,7 @@
             // txtNroDoc
             // 
             this.txtNroDoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNroDoc.Location = new System.Drawing.Point(237, 21);
+            this.txtNroDoc.Location = new System.Drawing.Point(327, 21);
             this.txtNroDoc.Name = "txtNroDoc";
             this.txtNroDoc.Size = new System.Drawing.Size(91, 20);
             this.txtNroDoc.TabIndex = 31;

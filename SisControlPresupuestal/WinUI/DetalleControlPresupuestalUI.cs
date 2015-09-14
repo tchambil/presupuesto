@@ -13,6 +13,8 @@ using Formularios;
 
 namespace WinUI
 {
+     
+
     public partial class DetalleControlPresupuestalUI : Form
     {
         public DetalleControlPresupuestalUI(int var)
@@ -27,7 +29,7 @@ namespace WinUI
         {
             listBotones = new List<Button>() { btnNuevo, btnGuardar, btnModificar, btnCancelar };
             dgvGastoEspecifico.DefaultCellStyle.ForeColor = Color.Black;
-            WinForm.BloquearTextBox(this);
+            WinForm.pfActiveButon(this,true);
             prcList_Meta();
             prcCargarCbEspecificasDeGasto();
             prcList_MetaEspecificoDeGasto();
@@ -114,7 +116,7 @@ namespace WinUI
             Nuevo = true;
           
            // WinForm.LimpiarTextBox(this);
-            WinForm.DesbloquearTextBox(this);
+            WinForm.pfActiveControl(this,true);
             Botones.EstablecerEstadoBotones(listBotones, false);
             
         }
@@ -172,7 +174,7 @@ namespace WinUI
                     if (new MetaEspecificoDeGasto_BUS().Insert_MetaEspecificoDeGasto(pMetaEspecificoDeGasto))
                     {
                        
-                        WinForm.BloquearTextBox(this);
+                        WinForm.pfActiveButon(this,true);
                         prcList_MetaEspecificoDeGasto();
                       
                         Botones.EstablecerEstadoBotones(listBotones, true);
@@ -188,7 +190,7 @@ namespace WinUI
 
                     if (new MetaEspecificoDeGasto_BUS().Update_MetaEspecificoDeGasto(pMetaEspecificoDeGasto))
                     {
-                        WinForm.BloquearTextBox(this);
+                        WinForm.pfActiveButon(this,true);
                         prcList_MetaEspecificoDeGasto();
                         Botones.EstablecerEstadoBotones(listBotones, true);
                     }
@@ -203,14 +205,14 @@ namespace WinUI
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Nuevo = false;
-            WinForm.DesbloquearTextBox(this);
+            WinForm.pfActiveControl(this,true);
             Botones.EstablecerEstadoBotones(listBotones, false);  
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            WinForm.LimpiarTextBox(this);
-            WinForm.BloquearTextBox(this);
+            WinForm.pfCleanTextBox(this);
+            WinForm.pfActiveButon(this,false);
             //txtBusqueda.Enabled = true;
             Botones.EstablecerEstadoBotones(listBotones, true);
         }
@@ -242,7 +244,7 @@ namespace WinUI
                     if (new MetaEspecificoDeGastoModificado_BUS().Insert_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
                     {
 
-                        WinForm.BloquearTextBox(this);
+                        WinForm.pfActiveButon(this,false);
                         prcList_MetaEspecificoDeGastoModificado();
 
                         Botones.EstablecerEstadoBotones(listBotones, true);
@@ -258,7 +260,7 @@ namespace WinUI
 
                     if (new MetaEspecificoDeGastoModificado_BUS().Update_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
                     {
-                        WinForm.BloquearTextBox(this);
+                        WinForm.pfActiveButon(this,false);
                         prcList_MetaEspecificoDeGastoModificado();
                         Botones.EstablecerEstadoBotones(listBotones, true);
                     }
