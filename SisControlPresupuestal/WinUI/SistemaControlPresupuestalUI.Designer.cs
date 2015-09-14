@@ -31,6 +31,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbEspecificaDeGasto = new System.Windows.Forms.ComboBox();
             this.dgvControlPresupuestal = new System.Windows.Forms.DataGridView();
+            this.colnro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.coldocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSiaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFGiro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colConcepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPartidaEspecifica = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPartidaContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col0034 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col0062 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col0063 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -70,22 +86,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtId = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.colnro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.coldocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSiaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFGiro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colConcepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPartidaEspecifica = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPartidaContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col0034 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col0062 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col0063 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvControlPresupuestal)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -116,7 +116,6 @@
             // 
             this.dgvControlPresupuestal.AllowUserToAddRows = false;
             this.dgvControlPresupuestal.AllowUserToDeleteRows = false;
-            this.dgvControlPresupuestal.AllowUserToResizeRows = false;
             this.dgvControlPresupuestal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvControlPresupuestal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvControlPresupuestal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -147,6 +146,134 @@
             this.dgvControlPresupuestal.TabIndex = 6;
             this.dgvControlPresupuestal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvControlPresupuestal_CellClick);
             this.dgvControlPresupuestal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvControlPresupuestal_CellContentClick);
+            // 
+            // colnro
+            // 
+            this.colnro.DataPropertyName = "CPRE_INT_IDCONTROLPRESUPUESTAL";
+            this.colnro.HeaderText = "N°";
+            this.colnro.Name = "colnro";
+            this.colnro.ReadOnly = true;
+            this.colnro.Width = 44;
+            // 
+            // coldocumento
+            // 
+            this.coldocumento.DataPropertyName = "DOCU_VCH_NOMBRE";
+            this.coldocumento.HeaderText = "Documento";
+            this.coldocumento.Name = "coldocumento";
+            this.coldocumento.ReadOnly = true;
+            this.coldocumento.Width = 87;
+            // 
+            // colNroDocumento
+            // 
+            this.colNroDocumento.DataPropertyName = "CPRE_VCH_NRODOCUMENTO";
+            this.colNroDocumento.HeaderText = "#";
+            this.colNroDocumento.Name = "colNroDocumento";
+            this.colNroDocumento.ReadOnly = true;
+            this.colNroDocumento.Width = 39;
+            // 
+            // colFIngreso
+            // 
+            this.colFIngreso.DataPropertyName = "CPRE_DAT_FECHAINGRESO";
+            this.colFIngreso.HeaderText = "Fecha Ingreso";
+            this.colFIngreso.Name = "colFIngreso";
+            this.colFIngreso.ReadOnly = true;
+            this.colFIngreso.Width = 92;
+            // 
+            // colCP
+            // 
+            this.colCP.DataPropertyName = "CPRE_VCH_NROCOMPROBANTEPAGO";
+            this.colCP.HeaderText = "C/P";
+            this.colCP.Name = "colCP";
+            this.colCP.ReadOnly = true;
+            this.colCP.Width = 51;
+            // 
+            // colSiaf
+            // 
+            this.colSiaf.DataPropertyName = "CPRE_VCH_NROSIAF";
+            this.colSiaf.HeaderText = "SIAF";
+            this.colSiaf.Name = "colSiaf";
+            this.colSiaf.ReadOnly = true;
+            this.colSiaf.Width = 55;
+            // 
+            // colFGiro
+            // 
+            this.colFGiro.DataPropertyName = "CPRE_DAT_FECHAGIRO";
+            this.colFGiro.HeaderText = "Fecha Giro";
+            this.colFGiro.Name = "colFGiro";
+            this.colFGiro.ReadOnly = true;
+            this.colFGiro.Width = 78;
+            // 
+            // colFPago
+            // 
+            this.colFPago.DataPropertyName = "CPRE_DAT_FECHAPAGO";
+            this.colFPago.HeaderText = "Fecha Pago";
+            this.colFPago.Name = "colFPago";
+            this.colFPago.ReadOnly = true;
+            this.colFPago.Width = 83;
+            // 
+            // colDetalle
+            // 
+            this.colDetalle.DataPropertyName = "CPRE_VCH_DETALLEESPECIFICADEGASTO";
+            this.colDetalle.HeaderText = "Detalle";
+            this.colDetalle.Name = "colDetalle";
+            this.colDetalle.ReadOnly = true;
+            this.colDetalle.Width = 65;
+            // 
+            // colConcepto
+            // 
+            this.colConcepto.DataPropertyName = "CPRE_VCH_CONCEPTOESPECIFICADEGASTO";
+            this.colConcepto.HeaderText = "Concepto";
+            this.colConcepto.Name = "colConcepto";
+            this.colConcepto.ReadOnly = true;
+            this.colConcepto.Width = 78;
+            // 
+            // colPartidaEspecifica
+            // 
+            this.colPartidaEspecifica.DataPropertyName = "EGAS_VCH_IDESPECIFICADEGASTO";
+            this.colPartidaEspecifica.HeaderText = "Partida Especifica";
+            this.colPartidaEspecifica.Name = "colPartidaEspecifica";
+            this.colPartidaEspecifica.ReadOnly = true;
+            this.colPartidaEspecifica.Width = 107;
+            // 
+            // colPartidaContable
+            // 
+            this.colPartidaContable.DataPropertyName = "CPRE_VCH_PARTIDACONTABLE";
+            this.colPartidaContable.HeaderText = "Partida Contoble";
+            this.colPartidaContable.Name = "colPartidaContable";
+            this.colPartidaContable.ReadOnly = true;
+            this.colPartidaContable.Width = 101;
+            // 
+            // col0034
+            // 
+            this.col0034.DataPropertyName = "META_DEC_META_34";
+            this.col0034.HeaderText = "0034";
+            this.col0034.Name = "col0034";
+            this.col0034.ReadOnly = true;
+            this.col0034.Width = 56;
+            // 
+            // col0062
+            // 
+            this.col0062.DataPropertyName = "META_DEC_META_62";
+            this.col0062.HeaderText = "0062";
+            this.col0062.Name = "col0062";
+            this.col0062.ReadOnly = true;
+            this.col0062.Width = 56;
+            // 
+            // col0063
+            // 
+            this.col0063.DataPropertyName = "META_DEC_META_63";
+            this.col0063.HeaderText = "0063";
+            this.col0063.Name = "col0063";
+            this.col0063.ReadOnly = true;
+            this.col0063.Width = 56;
+            // 
+            // colTotal
+            // 
+            this.colTotal.DataPropertyName = "META_DEC_TOTAL";
+            this.colTotal.HeaderText = "Total";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.ReadOnly = true;
+            this.colTotal.Width = 56;
             // 
             // label7
             // 
@@ -534,118 +661,6 @@
             this.button1.Text = "Ver...";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // colnro
-            // 
-            this.colnro.DataPropertyName = "CPRE_INT_IDCONTROLPRESUPUESTAL";
-            this.colnro.HeaderText = "N°";
-            this.colnro.Name = "colnro";
-            this.colnro.Width = 5;
-            // 
-            // coldocumento
-            // 
-            this.coldocumento.DataPropertyName = "DOCU_VCH_NOMBRE";
-            this.coldocumento.HeaderText = "Documento";
-            this.coldocumento.Name = "coldocumento";
-            this.coldocumento.Width = 5;
-            // 
-            // colNroDocumento
-            // 
-            this.colNroDocumento.DataPropertyName = "CPRE_VCH_NRODOCUMENTO";
-            this.colNroDocumento.HeaderText = "#";
-            this.colNroDocumento.Name = "colNroDocumento";
-            this.colNroDocumento.Width = 5;
-            // 
-            // colFIngreso
-            // 
-            this.colFIngreso.DataPropertyName = "CPRE_DAT_FECHAINGRESO";
-            this.colFIngreso.HeaderText = "Fecha Ingreso";
-            this.colFIngreso.Name = "colFIngreso";
-            this.colFIngreso.Width = 5;
-            // 
-            // colCP
-            // 
-            this.colCP.DataPropertyName = "CPRE_VCH_NROCOMPROBANTEPAGO";
-            this.colCP.HeaderText = "C/P";
-            this.colCP.Name = "colCP";
-            this.colCP.Width = 5;
-            // 
-            // colSiaf
-            // 
-            this.colSiaf.DataPropertyName = "CPRE_VCH_NROSIAF";
-            this.colSiaf.HeaderText = "SIAF";
-            this.colSiaf.Name = "colSiaf";
-            this.colSiaf.Width = 5;
-            // 
-            // colFGiro
-            // 
-            this.colFGiro.DataPropertyName = "CPRE_DAT_FECHAGIRO";
-            this.colFGiro.HeaderText = "Fecha Giro";
-            this.colFGiro.Name = "colFGiro";
-            this.colFGiro.Width = 5;
-            // 
-            // colFPago
-            // 
-            this.colFPago.DataPropertyName = "CPRE_DAT_FECHAPAGO";
-            this.colFPago.HeaderText = "Fecha Pago";
-            this.colFPago.Name = "colFPago";
-            this.colFPago.Width = 5;
-            // 
-            // colDetalle
-            // 
-            this.colDetalle.DataPropertyName = "CPRE_VCH_DETALLEESPECIFICADEGASTO";
-            this.colDetalle.HeaderText = "Detalle";
-            this.colDetalle.Name = "colDetalle";
-            this.colDetalle.Width = 5;
-            // 
-            // colConcepto
-            // 
-            this.colConcepto.DataPropertyName = "CPRE_VCH_CONCEPTOESPECIFICADEGASTO";
-            this.colConcepto.HeaderText = "Concepto";
-            this.colConcepto.Name = "colConcepto";
-            this.colConcepto.Width = 5;
-            // 
-            // colPartidaEspecifica
-            // 
-            this.colPartidaEspecifica.DataPropertyName = "EGAS_VCH_IDESPECIFICADEGASTO";
-            this.colPartidaEspecifica.HeaderText = "Partida Especifica";
-            this.colPartidaEspecifica.Name = "colPartidaEspecifica";
-            this.colPartidaEspecifica.Width = 5;
-            // 
-            // colPartidaContable
-            // 
-            this.colPartidaContable.DataPropertyName = "CPRE_VCH_PARTIDACONTABLE";
-            this.colPartidaContable.HeaderText = "Partida Contoble";
-            this.colPartidaContable.Name = "colPartidaContable";
-            this.colPartidaContable.Width = 5;
-            // 
-            // col0034
-            // 
-            this.col0034.DataPropertyName = "META_DEC_META_34";
-            this.col0034.HeaderText = "0034";
-            this.col0034.Name = "col0034";
-            this.col0034.Width = 5;
-            // 
-            // col0062
-            // 
-            this.col0062.DataPropertyName = "META_DEC_META_62";
-            this.col0062.HeaderText = "0062";
-            this.col0062.Name = "col0062";
-            this.col0062.Width = 5;
-            // 
-            // col0063
-            // 
-            this.col0063.DataPropertyName = "META_DEC_META_63";
-            this.col0063.HeaderText = "0063";
-            this.col0063.Name = "col0063";
-            this.col0063.Width = 5;
-            // 
-            // colTotal
-            // 
-            this.colTotal.DataPropertyName = "META_DEC_TOTAL";
-            this.colTotal.HeaderText = "Total";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.Width = 5;
             // 
             // SistemaControlPresupuestalUI
             // 

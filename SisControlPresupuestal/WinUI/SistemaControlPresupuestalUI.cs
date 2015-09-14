@@ -25,9 +25,7 @@ namespace WinUI
         }
         int var = 0;
         private Boolean Nuevo;
-        List<Button> listBotones;
-
-        private void SistemaControlPresupuestalUI_Load(object sender, EventArgs e)
+          private void SistemaControlPresupuestalUI_Load(object sender, EventArgs e)
         {
 
             prcCargaControlPrespuestal();
@@ -90,10 +88,7 @@ namespace WinUI
 
             DataTable mDtControlPresupuestal = new BUS.ControlPresupuestal_BUS().List_ControlPresupuestal();
             if (mDtControlPresupuestal != null)
-            {
-                Int32 i = 0;
-
-                this.dgvControlPresupuestal.Rows.Clear();
+            {   this.dgvControlPresupuestal.Rows.Clear();            
                 foreach (DataRow rw in mDtControlPresupuestal.Rows)
                 {
                     dgvControlPresupuestal.Rows.Add();
@@ -126,7 +121,6 @@ namespace WinUI
 
             if (mDtDetalleControlPresupuestal != null)
             {
-                Int32 i = 0;
                 dgvDetalleControlPresupuestal.Rows.Clear();
                 foreach (DataRow rw in mDtDetalleControlPresupuestal.Rows)
                 {
@@ -135,9 +129,7 @@ namespace WinUI
                     DataGridViewRow R = dgvDetalleControlPresupuestal.Rows[RowIndex];
                     R.Cells["colMeta"].Value = rw["META_VCH_IDMETA"];
                     R.Cells["colImporte"].Value = rw["DCPR_DEC_IMPORTE"];
-
-
-                }
+               }
                 prcCalculoMeta();
             }
         }
@@ -230,8 +222,7 @@ namespace WinUI
                     if (new ControlPresupuestal_BUS().Insert_ControlPresupuestal(ref pControlPresupuestal, DtDetalleControlPresupuestal))
                     {
                         this.txtId.Text = pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL.ToString();
-                        
-                      
+                        prcCargaControlPrespuestal();
                     }
                     else
                     {
@@ -255,10 +246,7 @@ namespace WinUI
                 }
                 WinForm.pfActiveControl(this, false);
                 prcActiveButton(true, true);
-
-                prcCargaControlPrespuestal();
-
-                this.dgvControlPresupuestal.Enabled = true;
+               this.dgvControlPresupuestal.Enabled = true;
             }
 
         }
