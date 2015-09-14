@@ -230,9 +230,8 @@ namespace WinUI
                     if (new ControlPresupuestal_BUS().Insert_ControlPresupuestal(ref pControlPresupuestal, DtDetalleControlPresupuestal))
                     {
                         this.txtId.Text = pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL.ToString();
-                        WinForm.pfActiveButon(this, true);
-                        prcCargaControlPrespuestal();
-                        Botones.EstablecerEstadoBotones(listBotones, true);
+                        
+                      
                     }
                     else
                     {
@@ -245,15 +244,21 @@ namespace WinUI
 
                     if (new ControlPresupuestal_BUS().Update_ControlPresupuestal(pControlPresupuestal, DtDetalleControlPresupuestal))
                     {
-                        WinForm.pfActiveButon(this, true);
+                       
                         prcCargaControlPrespuestal();
-                        Botones.EstablecerEstadoBotones(listBotones, true);
+                     
                     }
                     else
                     {
                         MessageBox.Show("Error al guardar Registro");
                     }
                 }
+                WinForm.pfActiveControl(this, false);
+                prcActiveButton(true, true);
+
+                prcCargaControlPrespuestal();
+
+                this.dgvControlPresupuestal.Enabled = true;
             }
 
         }
