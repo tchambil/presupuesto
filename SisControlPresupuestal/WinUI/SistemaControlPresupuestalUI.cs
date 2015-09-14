@@ -21,7 +21,7 @@ namespace WinUI
 
 
             cmbEspecificaDeGasto.DropDownStyle = ComboBoxStyle.DropDownList;
- 
+
         }
         int var = 0;
         private Boolean Nuevo;
@@ -30,39 +30,13 @@ namespace WinUI
         private void SistemaControlPresupuestalUI_Load(object sender, EventArgs e)
         {
 
-
-            //-------------------------------------------------------------------------------------//
-            listBotones = new List<Button>() { btnNuevo, btnGuardar, btnModificar, btnCancelar };
-            dgvControlPresupuestal.DefaultCellStyle.ForeColor = Color.Black;
-           
-           
-            prcList_ControlPrespuestal();
+            prcCargaControlPrespuestal();
             WinForm.pfActiveControl(this, false);
-            prcActiveButton(true, false);
+            prcActiveButton(true, true);
             WinForm.pfCleanTextBox(this);
             prcInitCbo();
             this.dgvControlPresupuestal.ClearSelection();
-            Botones.EstablecerEstadoBotones(listBotones, true);
-            List<int> listaColumnas = new List<int>() { 15, 16 };
-            Grilla.EsconderColumnas(dgvControlPresupuestal, listaColumnas);
-            dgvControlPresupuestal.Columns[1].Name = "N°";
-            dgvControlPresupuestal.Columns[2].Name = "Doc.";
-            dgvControlPresupuestal.Columns[3].Name = "#";
-            dgvControlPresupuestal.Columns[4].Name = "Fecha de Ingreso";
-            dgvControlPresupuestal.Columns[5].Name = "C/P";
-            dgvControlPresupuestal.Columns[6].Name = "SIAF";
-            dgvControlPresupuestal.Columns[7].Name = "Fecha de Giro";
-            dgvControlPresupuestal.Columns[8].Name = "Fecha de Pago";
-            dgvControlPresupuestal.Columns[9].Name = "Detalle";
-            dgvControlPresupuestal.Columns[10].Name = "Concepto";
-            dgvControlPresupuestal.Columns[11].Name = "Partida Específica";
-            dgvControlPresupuestal.Columns[12].Name = "Partida Contable";
-            dgvControlPresupuestal.Columns[13].Name = "0034";
-            dgvControlPresupuestal.Columns[14].Name = "0062";
-            dgvControlPresupuestal.Columns[15].Name = "0063";
 
-            string[] cabeceras = { "N°", "Doc.", "#", "Fecha de Ingreso", "C/P", "SIAF", "Fecha de Giro", "Fecha de Pago", "Detalle", "Concepto", "Partida Específica", "Partida Contable", "0034", "0062", "0063", "Total" };
-            Grilla.PonerCabeceraAGrid(dgvControlPresupuestal, cabeceras);
             this.dgvControlPresupuestal.Enabled = true;
         }
         private void prcInitCbo()
@@ -72,9 +46,10 @@ namespace WinUI
             this.cmbDocumentos.SelectedValue = -1;
             this.cmbEspecificaDeGasto.SelectedValue = -1;
         }
-        private void prcInitDataGriview() {
+        private void prcInitDataGriview()
+        {
             prcCargarCbEspecificasDeGasto();
-           
+
         }
         private void prcActiveButton(bool b_pState, bool b_lMod)
         {
@@ -110,22 +85,45 @@ namespace WinUI
 
 
         }
-        private void prcList_ControlPrespuestal()
+        private void prcCargaControlPrespuestal()
         {
 
             DataTable mDtControlPresupuestal = new BUS.ControlPresupuestal_BUS().List_ControlPresupuestal();
             if (mDtControlPresupuestal != null)
             {
-                this.dgvControlPresupuestal.DataSource = null;
-                this.dgvControlPresupuestal.DataSource = mDtControlPresupuestal;
-                this.dgvControlPresupuestal.Update();
+                Int32 i = 0;
+
+                this.dgvControlPresupuestal.Rows.Clear();
+                foreach (DataRow rw in mDtControlPresupuestal.Rows)
+                {
+                    dgvControlPresupuestal.Rows.Add();
+                    int RowIndex = dgvControlPresupuestal.RowCount - 1;
+                    DataGridViewRow R = dgvControlPresupuestal.Rows[RowIndex];
+                    R.Cells["colnro"].Value = rw["CPRE_INT_IDCONTROLPRESUPUESTAL"];
+                    R.Cells["coldocumento"].Value = rw["DOCU_VCH_NOMBRE"];
+                    R.Cells["colNroDocumento"].Value = rw["CPRE_VCH_NRODOCUMENTO"];
+                    R.Cells["colFIngreso"].Value = rw["CPRE_DAT_FECHAINGRESO"];
+                    R.Cells["colCP"].Value = rw["CPRE_VCH_NROCOMPROBANTEPAGO"];
+                    R.Cells["colSiaf"].Value = rw["CPRE_VCH_NROSIAF"];
+                    R.Cells["colFGiro"].Value = rw["CPRE_DAT_FECHAGIRO"];
+                    R.Cells["colFPago"].Value = rw["CPRE_DAT_FECHAPAGO"];
+                    R.Cells["colDetalle"].Value = rw["CPRE_VCH_DETALLEESPECIFICADEGASTO"];
+                    R.Cells["colConcepto"].Value = rw["CPRE_VCH_CONCEPTOESPECIFICADEGASTO"];
+                    R.Cells["colPartidaEspecifica"].Value = rw["EGAS_VCH_IDESPECIFICADEGASTO"];
+                    R.Cells["colPartidaContable"].Value = rw["CPRE_VCH_PARTIDACONTABLE"];
+                    R.Cells["col0034"].Value = rw["META_DEC_META_34"];
+                    R.Cells["col0062"].Value = rw["META_DEC_META_62"];
+                    R.Cells["col0063"].Value = rw["META_DEC_META_63"];
+                    R.Cells["colTotal"].Value = rw["META_DEC_TOTAL"];
+
+                }
             }
         }
         private void prcList_MetaControlPrespuestal(int inIdControlPresupuestal)
         {
 
             DataTable mDtDetalleControlPresupuestal = new BUS.DetalleControlPresupuestal_BUS().List_DetalleControlPresupuestal(inIdControlPresupuestal);
-            
+
             if (mDtDetalleControlPresupuestal != null)
             {
                 Int32 i = 0;
@@ -136,9 +134,9 @@ namespace WinUI
                     int RowIndex = dgvDetalleControlPresupuestal.RowCount - 1;
                     DataGridViewRow R = dgvDetalleControlPresupuestal.Rows[RowIndex];
                     R.Cells["colMeta"].Value = rw["META_VCH_IDMETA"];
-                    R.Cells["colImporte"].Value = rw["DCPR_DEC_IMPORTE"]; 
-                    
-                    
+                    R.Cells["colImporte"].Value = rw["DCPR_DEC_IMPORTE"];
+
+
                 }
                 prcCalculoMeta();
             }
@@ -146,7 +144,7 @@ namespace WinUI
         private void prcCalculoMeta()
         {
             double sumatoria = 0;
-             foreach (DataGridViewRow item in dgvDetalleControlPresupuestal.Rows)
+            foreach (DataGridViewRow item in dgvDetalleControlPresupuestal.Rows)
             {
                 sumatoria += Convert.ToDouble(item.Cells[1].Value);
 
@@ -155,7 +153,7 @@ namespace WinUI
         }
         private void prcSeleccionarFila()
         {
-             cmbDocumentos.Text = dgvControlPresupuestal[1, dgvControlPresupuestal.CurrentRow.Index].Value.ToString();
+            cmbDocumentos.Text = dgvControlPresupuestal[1, dgvControlPresupuestal.CurrentRow.Index].Value.ToString();
             txtNroDoc.Text = dgvControlPresupuestal[2, dgvControlPresupuestal.CurrentRow.Index].Value.ToString();
             dtpFechaIngreso.Text = dgvControlPresupuestal[3, dgvControlPresupuestal.CurrentRow.Index].Value.ToString();
             txtComprobante.Text = dgvControlPresupuestal[4, dgvControlPresupuestal.CurrentRow.Index].Value.ToString();
@@ -172,16 +170,16 @@ namespace WinUI
         private void prcPrepareMeta()
         {
 
-                 dgvDetalleControlPresupuestal.Rows.Clear();
-                string[] row_0034 = new string[] { "0034", "0.00" };
-                dgvDetalleControlPresupuestal.Rows.Add(row_0034);
-                string[] row_0062 = new string[] { "0062", "0.00" };
-                dgvDetalleControlPresupuestal.Rows.Add(row_0062);
-                string[] row_0063 = new string[] { "0063", "0.00" };
-                dgvDetalleControlPresupuestal.Rows.Add(row_0063);
-           
-            
-            
+            dgvDetalleControlPresupuestal.Rows.Clear();
+            string[] row_0034 = new string[] { "0034", "0.00" };
+            dgvDetalleControlPresupuestal.Rows.Add(row_0034);
+            string[] row_0062 = new string[] { "0062", "0.00" };
+            dgvDetalleControlPresupuestal.Rows.Add(row_0062);
+            string[] row_0063 = new string[] { "0063", "0.00" };
+            dgvDetalleControlPresupuestal.Rows.Add(row_0063);
+
+
+
 
         }
         private ControlPresupuestal_VO prcGetControlPresupuestal()
@@ -207,12 +205,12 @@ namespace WinUI
 
             Nuevo = true;
             WinForm.pfCleanTextBox(this);
-            WinForm.pfActiveControl(this,true);
-            WinForm.pfActiveButon(this, false);
-            Botones.EstablecerEstadoBotones(listBotones, false);
+            WinForm.pfActiveControl(this, true);
+            prcActiveButton(false, false);
             this.dgvControlPresupuestal.Enabled = false;
             this.dgvControlPresupuestal.ClearSelection();
-            txtId.Text = "0";
+            this.txtId.Text = "0";
+            this.txtId.Enabled = false;
             prcPrepareMeta();
 
         }
@@ -232,8 +230,8 @@ namespace WinUI
                     if (new ControlPresupuestal_BUS().Insert_ControlPresupuestal(ref pControlPresupuestal, DtDetalleControlPresupuestal))
                     {
                         this.txtId.Text = pControlPresupuestal.CPRE_INT_IDCONTROLPRESUPUESTAL.ToString();
-                        WinForm.pfActiveButon(this,true);
-                        prcList_ControlPrespuestal();
+                        WinForm.pfActiveButon(this, true);
+                        prcCargaControlPrespuestal();
                         Botones.EstablecerEstadoBotones(listBotones, true);
                     }
                     else
@@ -247,8 +245,8 @@ namespace WinUI
 
                     if (new ControlPresupuestal_BUS().Update_ControlPresupuestal(pControlPresupuestal, DtDetalleControlPresupuestal))
                     {
-                        WinForm.pfActiveButon(this,true);
-                        prcList_ControlPrespuestal();
+                        WinForm.pfActiveButon(this, true);
+                        prcCargaControlPrespuestal();
                         Botones.EstablecerEstadoBotones(listBotones, true);
                     }
                     else
@@ -276,18 +274,22 @@ namespace WinUI
         }
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Nuevo = false;
-            WinForm.pfActiveControl(this,true);
-            Botones.EstablecerEstadoBotones(listBotones, false);
+            if (this.dgvDetalleControlPresupuestal.Rows.Count > 0)
+            {
+                Nuevo = false;
+                WinForm.pfActiveControl(this, true);
+                prcActiveButton(false, false);
+                prcSeleccionarFila();
+            }
+
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             WinForm.pfActiveControl(this, false);
-            prcActiveButton(true, false);
+            prcActiveButton(true, true);
             WinForm.pfCleanTextBox(this);
             this.dgvControlPresupuestal.ClearSelection();
-            this.dgvControlPresupuestal.Enabled = true;
-            Botones.EstablecerEstadoBotones(listBotones, true);
+            this.dgvControlPresupuestal.Enabled = true; 
         }
         private void btnVer_Click(object sender, EventArgs e)
         {
@@ -320,8 +322,9 @@ namespace WinUI
             if (e.ColumnIndex == 1)
             {
                 double NroCell;
-                if(!Double.TryParse(e.FormattedValue.ToString(),out NroCell))
-                {    e.Cancel = true;
+                if (!Double.TryParse(e.FormattedValue.ToString(), out NroCell))
+                {
+                    e.Cancel = true;
                     this.dgvDetalleControlPresupuestal.Rows[this.dgvDetalleControlPresupuestal.CurrentRow.Index].Cells["colImporte"].Value = 0;
                     MessageBox.Show("Ingreso Numeros");
                 }

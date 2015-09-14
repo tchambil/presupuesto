@@ -70,6 +70,22 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtId = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.colnro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.coldocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSiaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFGiro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colConcepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPartidaEspecifica = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPartidaContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col0034 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col0062 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col0063 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvControlPresupuestal)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -100,12 +116,32 @@
             // 
             this.dgvControlPresupuestal.AllowUserToAddRows = false;
             this.dgvControlPresupuestal.AllowUserToDeleteRows = false;
+            this.dgvControlPresupuestal.AllowUserToResizeRows = false;
             this.dgvControlPresupuestal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvControlPresupuestal.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedHeaders;
             this.dgvControlPresupuestal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvControlPresupuestal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colnro,
+            this.coldocumento,
+            this.colNroDocumento,
+            this.colFIngreso,
+            this.colCP,
+            this.colSiaf,
+            this.colFGiro,
+            this.colFPago,
+            this.colDetalle,
+            this.colConcepto,
+            this.colPartidaEspecifica,
+            this.colPartidaContable,
+            this.col0034,
+            this.col0062,
+            this.col0063,
+            this.colTotal});
+            this.dgvControlPresupuestal.Cursor = System.Windows.Forms.Cursors.Default;
             this.dgvControlPresupuestal.Location = new System.Drawing.Point(16, 214);
+            this.dgvControlPresupuestal.MultiSelect = false;
             this.dgvControlPresupuestal.Name = "dgvControlPresupuestal";
             this.dgvControlPresupuestal.ReadOnly = true;
+            this.dgvControlPresupuestal.RowHeadersVisible = false;
             this.dgvControlPresupuestal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvControlPresupuestal.Size = new System.Drawing.Size(1299, 375);
             this.dgvControlPresupuestal.TabIndex = 6;
@@ -487,6 +523,7 @@
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(53, 20);
             this.txtId.TabIndex = 68;
+            this.txtId.Visible = false;
             // 
             // button1
             // 
@@ -497,6 +534,118 @@
             this.button1.Text = "Ver...";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // colnro
+            // 
+            this.colnro.DataPropertyName = "CPRE_INT_IDCONTROLPRESUPUESTAL";
+            this.colnro.HeaderText = "N°";
+            this.colnro.Name = "colnro";
+            this.colnro.Width = 5;
+            // 
+            // coldocumento
+            // 
+            this.coldocumento.DataPropertyName = "DOCU_VCH_NOMBRE";
+            this.coldocumento.HeaderText = "Documento";
+            this.coldocumento.Name = "coldocumento";
+            this.coldocumento.Width = 5;
+            // 
+            // colNroDocumento
+            // 
+            this.colNroDocumento.DataPropertyName = "CPRE_VCH_NRODOCUMENTO";
+            this.colNroDocumento.HeaderText = "#";
+            this.colNroDocumento.Name = "colNroDocumento";
+            this.colNroDocumento.Width = 5;
+            // 
+            // colFIngreso
+            // 
+            this.colFIngreso.DataPropertyName = "CPRE_DAT_FECHAINGRESO";
+            this.colFIngreso.HeaderText = "Fecha Ingreso";
+            this.colFIngreso.Name = "colFIngreso";
+            this.colFIngreso.Width = 5;
+            // 
+            // colCP
+            // 
+            this.colCP.DataPropertyName = "CPRE_VCH_NROCOMPROBANTEPAGO";
+            this.colCP.HeaderText = "C/P";
+            this.colCP.Name = "colCP";
+            this.colCP.Width = 5;
+            // 
+            // colSiaf
+            // 
+            this.colSiaf.DataPropertyName = "CPRE_VCH_NROSIAF";
+            this.colSiaf.HeaderText = "SIAF";
+            this.colSiaf.Name = "colSiaf";
+            this.colSiaf.Width = 5;
+            // 
+            // colFGiro
+            // 
+            this.colFGiro.DataPropertyName = "CPRE_DAT_FECHAGIRO";
+            this.colFGiro.HeaderText = "Fecha Giro";
+            this.colFGiro.Name = "colFGiro";
+            this.colFGiro.Width = 5;
+            // 
+            // colFPago
+            // 
+            this.colFPago.DataPropertyName = "CPRE_DAT_FECHAPAGO";
+            this.colFPago.HeaderText = "Fecha Pago";
+            this.colFPago.Name = "colFPago";
+            this.colFPago.Width = 5;
+            // 
+            // colDetalle
+            // 
+            this.colDetalle.DataPropertyName = "CPRE_VCH_DETALLEESPECIFICADEGASTO";
+            this.colDetalle.HeaderText = "Detalle";
+            this.colDetalle.Name = "colDetalle";
+            this.colDetalle.Width = 5;
+            // 
+            // colConcepto
+            // 
+            this.colConcepto.DataPropertyName = "CPRE_VCH_CONCEPTOESPECIFICADEGASTO";
+            this.colConcepto.HeaderText = "Concepto";
+            this.colConcepto.Name = "colConcepto";
+            this.colConcepto.Width = 5;
+            // 
+            // colPartidaEspecifica
+            // 
+            this.colPartidaEspecifica.DataPropertyName = "EGAS_VCH_IDESPECIFICADEGASTO";
+            this.colPartidaEspecifica.HeaderText = "Partida Especifica";
+            this.colPartidaEspecifica.Name = "colPartidaEspecifica";
+            this.colPartidaEspecifica.Width = 5;
+            // 
+            // colPartidaContable
+            // 
+            this.colPartidaContable.DataPropertyName = "CPRE_VCH_PARTIDACONTABLE";
+            this.colPartidaContable.HeaderText = "Partida Contoble";
+            this.colPartidaContable.Name = "colPartidaContable";
+            this.colPartidaContable.Width = 5;
+            // 
+            // col0034
+            // 
+            this.col0034.DataPropertyName = "META_DEC_META_34";
+            this.col0034.HeaderText = "0034";
+            this.col0034.Name = "col0034";
+            this.col0034.Width = 5;
+            // 
+            // col0062
+            // 
+            this.col0062.DataPropertyName = "META_DEC_META_62";
+            this.col0062.HeaderText = "0062";
+            this.col0062.Name = "col0062";
+            this.col0062.Width = 5;
+            // 
+            // col0063
+            // 
+            this.col0063.DataPropertyName = "META_DEC_META_63";
+            this.col0063.HeaderText = "0063";
+            this.col0063.Name = "col0063";
+            this.col0063.Width = 5;
+            // 
+            // colTotal
+            // 
+            this.colTotal.DataPropertyName = "META_DEC_TOTAL";
+            this.colTotal.HeaderText = "Total";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.Width = 5;
             // 
             // SistemaControlPresupuestalUI
             // 
@@ -577,5 +726,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMeta;
         private System.Windows.Forms.DataGridViewTextBoxColumn colImporte;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colnro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn coldocumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNroDocumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFIngreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSiaf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFGiro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFPago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDetalle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colConcepto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPartidaEspecifica;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPartidaContable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col0034;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col0062;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col0063;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
     }
 }
