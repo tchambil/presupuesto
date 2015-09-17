@@ -20,7 +20,7 @@ namespace DAL
             bool b_DetalleControlPresupuestal;
             try
             { 
-                SqlCommand cmdComand = new SqlCommand("USP_A_SICOP_DETALLECONTROLPRESUPUESTAL");
+                SqlCommand cmdComand = new SqlCommand("USP_I_SICOP_DETALLECONTROLPRESUPUESTAL");
                 cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
                 cmdComand.Connection = TransDetalleControlPresupuestal.Connection;
                 cmdComand.Transaction = TransDetalleControlPresupuestal;

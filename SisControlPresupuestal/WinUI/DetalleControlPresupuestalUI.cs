@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using BUS;
 using VO;
 using Formularios;
-
+using System.Globalization;
+using System.Threading;
 namespace WinUI
 {
-     
+
 
     public partial class DetalleControlPresupuestalUI : Form
     {
@@ -24,26 +25,43 @@ namespace WinUI
         }
         int var = 0;
         private Boolean Nuevo;
-        List<Button> listBotones;
+        private Boolean b_Buscar;
         private void DetalleEjecucionDevengadosUI_Load(object sender, EventArgs e)
         {
-            listBotones = new List<Button>() { btnNuevo, btnGuardar, btnModificar, btnCancelar };
-            dgvGastoEspecifico.DefaultCellStyle.ForeColor = Color.Black;
-            WinForm.pfActiveButon(this,true);
-            prcList_Meta();
-            prcCargarCbEspecificasDeGasto();
-            prcList_MetaEspecificoDeGasto();
-           
 
-            Botones.EstablecerEstadoBotones(listBotones, true);
-       
-       
+            WinForm.pfActiveControl(this, true);
+            prcActiveButton(true, false);
+            prcInitCbo();
+            //  prcList_MetaEspecificoDeGasto();
+            prcList_Meta();
+            prcList_CbEspecificasDeGasto();
+
+
         }
-        private void prcCargarCbEspecificasDeGasto()
+        private void prcInitCbo()
+        {
+            this.cmbMetas.Enabled = true;
+            this.txtAnio.Enabled = true;
+            this.cmbEspecifica.Enabled = false;
+            this.txtpim.Enabled = false;
+            this.txtpim.Text = "0";
+            this.txtAnio.Text = DateTime.Today.Year.ToString();
+            this.dgvGastoEspecifico.Enabled = true;
+
+        }
+        private void prcActiveButton(bool b_pState, bool b_lMod)
+        {
+            WinForm.pfActiveButon(this, b_pState);
+            this.btnCancelar.Enabled = !b_pState;
+            this.btnGuardar.Enabled = !b_pState;
+            this.btnBuscar.Enabled = b_pState;
+            this.btnModificar.Enabled = b_lMod;
+        }
+        private void prcList_CbEspecificasDeGasto()
         {
 
             DataTable mDtEspecificoDeGasto = new BUS.EspecificoDeGasto_BUS().getEspecificasDeGastos();
-            
+
             if (mDtEspecificoDeGasto != null)
             {
                 this.cmbEspecifica.DataSource = mDtEspecificoDeGasto;
@@ -55,35 +73,62 @@ namespace WinUI
         }
         private void prcList_MetaEspecificoDeGasto()
         {
+            MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
+            pMetaEspecificoDeGasto = this.prcGetMetaEspecificoDeGasto();
+  
 
-            DataTable mDtMetaEspecificoDeGasto = new BUS.MetaEspecificoDeGasto_BUS().List_MetaEspecificaDeGasto( this.cmbMetas.SelectedValue.ToString());
+            DataTable mDtMetaEspecificoDeGasto = new MetaEspecificoDeGasto_BUS().List_MetaEspecificaDeGasto(pMetaEspecificoDeGasto);
+
             if (mDtMetaEspecificoDeGasto != null)
             {
-                this.dgvGastoEspecifico.DataSource = null;
-                this.dgvGastoEspecifico.DataSource = mDtMetaEspecificoDeGasto;
-                this.dgvGastoEspecifico.Update();
+                this.dgvGastoEspecifico.Rows.Clear();
+                foreach (DataRow rw in mDtMetaEspecificoDeGasto.Rows)
+                {
+                    dgvGastoEspecifico.Rows.Add();
+                    int RowIndex = dgvGastoEspecifico.RowCount - 1;
+                    DataGridViewRow R = dgvGastoEspecifico.Rows[RowIndex];
+                    R.Cells["colAnio"].Value = rw["MEGA_VCH_ANIO"];
+                    R.Cells["colIdMeta"].Value = rw["META_VCH_IDMETA"];
+                    R.Cells["colEspecificaGasto"].Value = rw["EGAS_VCH_IDESPECIFICADEGASTO"];
+                    R.Cells["colPIM"].Value = rw["MEGA_DEC_PIM"];
+                    R.Cells["colModifiacion"].Value = rw["MEGA_MODIFICACION"];
+                    R.Cells["colPresupuesto"].Value = rw["MEGA_PRESUPUESTO"];
+                    R.Cells["colEnero"].Value = rw["ENERO"];
+                    R.Cells["colFebrero"].Value = rw["FEBRERO"];
+                    R.Cells["colMarzo"].Value = rw["MARZO"];
+                    R.Cells["colAbril"].Value = rw["ABRIL"];
+                    R.Cells["colMayo"].Value = rw["MAYO"];
+                    R.Cells["colJunio"].Value = rw["JUNIO"];
+                    R.Cells["colJulio"].Value = rw["AGOSTO"];
+                    R.Cells["colAgosto"].Value = rw["SEPTIEMBRE"];
+                    R.Cells["colSetiembre"].Value = rw["OCTUBRE"];
+                    R.Cells["colNoviembre"].Value = rw["NOVIEMBRE"];
+                    R.Cells["colDiciembre"].Value = rw["DICIEMBRE"];
+                    R.Cells["colEjecutado"].Value = rw["TOTALEJECUTADO"];
+                    R.Cells["colSaldo"].Value = rw["SADOEJERCICIO"];
+                }
             }
             prcCalculoTotalSaldo();
         }
-        private void prcList_MetaEspecificoDeGastoModificado()
+        private void prcList_MetaEspecificoDeGastoModificado(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto)
         {
-            
-            DataTable mDtMetaEspecificoDeGastoModificado = new BUS.MetaEspecificoDeGastoModificado_BUS().List_MetaEspecificaDeGastoModificado(prcGetMetaEspecificoDeGasto());
+
+            DataTable mDtMetaEspecificoDeGastoModificado = new BUS.MetaEspecificoDeGastoModificado_BUS().List_MetaEspecificaDeGastoModificado(pMetaEspecificoDeGasto);
             if (mDtMetaEspecificoDeGastoModificado != null)
-             {
-                 Int32 i = 0;
-                 dgvModificado.Rows.Clear();
-                 foreach (DataRow rw in mDtMetaEspecificoDeGastoModificado.Rows)
-                 {
-                     dgvModificado.Rows.Add();
-                     int RowIndex = dgvModificado.RowCount - 1;
-                     DataGridViewRow R = dgvModificado.Rows[RowIndex];
+            {
+                Int32 i = 0;
+                dgvModificado.Rows.Clear();
+                foreach (DataRow rw in mDtMetaEspecificoDeGastoModificado.Rows)
+                {
+                    dgvModificado.Rows.Add();
+                    int RowIndex = dgvModificado.RowCount - 1;
+                    DataGridViewRow R = dgvModificado.Rows[RowIndex];
                     R.Cells["colIdModificado"].Value = rw["MEGM_INT_IDMODIFICACION"];
-                    R.Cells["colidMetaModificado"].Value =  rw["META_VCH_IDMETA"];
-                     R.Cells["colImporteModificado"].Value = rw["MEGM_DEC_PIMMODIFICADO"];
-                     R.Cells["colIdEspecificaModificado"].Value = rw["EGAS_VCH_IDESPECIFICADEGASTO"];
-             }
-             }
+                    R.Cells["colidMetaModificado"].Value = rw["META_VCH_IDMETA"];
+                    R.Cells["colImporteModificado"].Value = rw["MEGM_DEC_PIMMODIFICADO"];
+                    R.Cells["colIdEspecificaModificado"].Value = rw["EGAS_VCH_IDESPECIFICADEGASTO"];
+                }
+            }
         }
         private void prcList_Meta()
         {
@@ -100,12 +145,12 @@ namespace WinUI
                 this.cmbMetas.Update();
             }
         }
-         private void prcCalculoTotalSaldo()
+        private void prcCalculoTotalSaldo()
         {
             double sumatoria = 0;
             foreach (DataGridViewRow item in dgvGastoEspecifico.Rows)
-            { 
-                sumatoria += Convert.ToDouble(item.Cells["colSaldo"].Value);
+            {
+                sumatoria += Convert.ToDouble(item.Cells[19].Value);
 
             }
             this.txtTotal.Text = sumatoria.ToString();
@@ -114,24 +159,34 @@ namespace WinUI
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             Nuevo = true;
-          
-           // WinForm.LimpiarTextBox(this);
-            WinForm.pfActiveControl(this,true);
-            Botones.EstablecerEstadoBotones(listBotones, false);
-            
+            WinForm.pfCleanTextBox(this);
+            WinForm.pfActiveControl(this, true);
+            prcActiveButton(false, false);
+            this.cmbMetas.SelectedValue = -1;
+            this.cmbEspecifica.SelectedValue = -1;
+            this.txtAnio.Text = DateTime.Today.Year.ToString();
+
         }
         private MetaEspecificoDeGasto_VO prcGetMetaEspecificoDeGasto()
         {
             MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
-
-            pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = this.cmbEspecifica.SelectedValue.ToString();
-            pMetaEspecificoDeGasto.MEGA_VCH_ANIO = this.txtAnio.Text.ToString();
-            pMetaEspecificoDeGasto.META_VCH_IDMETA = this.cmbMetas.SelectedValue.ToString();
-            pMetaEspecificoDeGasto.MEGA_DEC_PIM = Convert.ToDecimal(this.txtpim.Text);
+            if (b_Buscar)
+            {
+                pMetaEspecificoDeGasto.MEGA_VCH_ANIO = this.txtAnio.Text.ToString();
+                pMetaEspecificoDeGasto.META_VCH_IDMETA = this.cmbMetas.SelectedValue.ToString();
+            }
+            else
+            {
+                pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = this.cmbEspecifica.SelectedValue.ToString();
+                pMetaEspecificoDeGasto.MEGA_VCH_ANIO = this.txtAnio.Text.ToString();
+                pMetaEspecificoDeGasto.META_VCH_IDMETA = this.cmbMetas.SelectedValue.ToString();
+                pMetaEspecificoDeGasto.MEGA_DEC_PIM = Convert.ToDecimal(this.txtpim.Text);
+            }
 
 
             return pMetaEspecificoDeGasto;
         }
+
         private MetaEspecificoDeGastoModificado_VO prcGetMetaEspecificoDeGastoModificado()
         {
             MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
@@ -142,22 +197,28 @@ namespace WinUI
         }
         private void prcSeleccionarFilaMetaEspefica()
         {
-                txtAnio.Text = dgvGastoEspecifico["colAnio", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
-                cmbMetas.SelectedValue = dgvGastoEspecifico["colIdMeta", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
-                cmbEspecifica.SelectedValue = dgvGastoEspecifico["colEspecificaGasto", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
-                txtpim.Text = dgvGastoEspecifico["colPIM", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
-                 prcList_MetaEspecificoDeGastoModificado();
-            
+            MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
+            txtAnio.Text = dgvGastoEspecifico["colAnio", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+            cmbMetas.SelectedValue = dgvGastoEspecifico["colIdMeta", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+            cmbEspecifica.SelectedValue = dgvGastoEspecifico["colEspecificaGasto", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+            txtpim.Text = dgvGastoEspecifico["colPIM", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+           
+            pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = dgvGastoEspecifico["colEspecificaGasto", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+            pMetaEspecificoDeGasto.META_VCH_IDMETA = dgvGastoEspecifico["colIdMeta", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
+
+
+            prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
+
         }
         private void prcSeleccionarFilaMetaEspeficaModificado()
-        { 
-           this.txtPIModificado.Text = dgvModificado["colImporteModificado", dgvModificado.CurrentRow.Index].Value.ToString();
-           
+        {
+            this.txtPIModificado.Text = dgvModificado["colImporteModificado", dgvModificado.CurrentRow.Index].Value.ToString();
+
 
         }
         private void prcSeleccionarFilaMetaEspeficaModifica()
         {
-            txtPIModificado.Text = dgvGastoEspecifico["colAnio", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();         
+            txtPIModificado.Text = dgvGastoEspecifico["colAnio", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
 
         }
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -168,16 +229,15 @@ namespace WinUI
             {
                 MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
                 pMetaEspecificoDeGasto = this.prcGetMetaEspecificoDeGasto();
-  
+
                 if (Nuevo == true)
                 {
                     if (new MetaEspecificoDeGasto_BUS().Insert_MetaEspecificoDeGasto(pMetaEspecificoDeGasto))
                     {
-                       
-                        WinForm.pfActiveButon(this,true);
+
+                        WinForm.pfActiveButon(this, true);
                         prcList_MetaEspecificoDeGasto();
-                      
-                        Botones.EstablecerEstadoBotones(listBotones, true);
+
                     }
                     else
                     {
@@ -190,31 +250,35 @@ namespace WinUI
 
                     if (new MetaEspecificoDeGasto_BUS().Update_MetaEspecificoDeGasto(pMetaEspecificoDeGasto))
                     {
-                        WinForm.pfActiveButon(this,true);
+                        WinForm.pfActiveButon(this, true);
                         prcList_MetaEspecificoDeGasto();
-                        Botones.EstablecerEstadoBotones(listBotones, true);
                     }
                     else
                     {
                         MessageBox.Show("Error al guardar Registro");
                     }
                 }
+                WinForm.pfActiveControl(this, false);
+                prcActiveButton(true, true);
+                this.dgvGastoEspecifico.Enabled = true;
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Nuevo = false;
-            WinForm.pfActiveControl(this,true);
-            Botones.EstablecerEstadoBotones(listBotones, false);  
+            WinForm.pfActiveControl(this, true);
+            prcActiveButton(false, false);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            
             WinForm.pfCleanTextBox(this);
-            WinForm.pfActiveButon(this,false);
-            //txtBusqueda.Enabled = true;
-            Botones.EstablecerEstadoBotones(listBotones, true);
+            WinForm.pfActiveControl(this, false);
+            prcActiveButton(true, false);
+            prcInitCbo();
+            //txtBusqueda.Enabled = true; 
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -226,10 +290,14 @@ namespace WinUI
 
         private void dgvGastoEspecifico_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            prcSeleccionarFilaMetaEspefica();
+            if (dgvGastoEspecifico.Rows.Count - 1 > 0) {
+                prcSeleccionarFilaMetaEspefica();
+                this.btnModificar.Enabled = true;
+            }
+           
         }
 
-        
+
 
         private void btnGuardarModifica_Click(object sender, EventArgs e)
         {
@@ -239,15 +307,18 @@ namespace WinUI
                 MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
                 pMetaEspecificoDeGastoModificado = this.prcGetMetaEspecificoDeGastoModificado();
 
+                MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
+                pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = pMetaEspecificoDeGastoModificado.EGAS_VCH_IDESPECIFICADEGASTO;
+                pMetaEspecificoDeGasto.META_VCH_IDMETA = pMetaEspecificoDeGastoModificado.META_VCH_IDMETA;
+
                 if (Nuevo == true)
                 {
                     if (new MetaEspecificoDeGastoModificado_BUS().Insert_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
                     {
 
-                        WinForm.pfActiveButon(this,false);
-                        prcList_MetaEspecificoDeGastoModificado();
+                        WinForm.pfActiveButon(this, false);
+                        prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
 
-                        Botones.EstablecerEstadoBotones(listBotones, true);
                     }
                     else
                     {
@@ -260,9 +331,8 @@ namespace WinUI
 
                     if (new MetaEspecificoDeGastoModificado_BUS().Update_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
                     {
-                        WinForm.pfActiveButon(this,false);
-                        prcList_MetaEspecificoDeGastoModificado();
-                        Botones.EstablecerEstadoBotones(listBotones, true);
+                        WinForm.pfActiveButon(this, false);
+                        prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
                     }
                     else
                     {
@@ -332,6 +402,94 @@ namespace WinUI
             {
                 throw ex;
             }
+        }
+
+        private void txtpim_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CultureInfo cc = System.Threading.Thread.CurrentThread.CurrentCulture;
+            if (char.IsNumber(e.KeyChar) || e.KeyChar.ToString() == cc.NumberFormat.NumberDecimalSeparator)
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == 13)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtAnio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void txtpim_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            b_Buscar = true;
+            MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
+            pMetaEspecificoDeGasto = this.prcGetMetaEspecificoDeGasto();
+
+            DataTable mDtMetaEspecificoDeGasto = new MetaEspecificoDeGasto_BUS().List_MetaEspecificaDeGasto(pMetaEspecificoDeGasto);
+
+            if (mDtMetaEspecificoDeGasto != null)
+            {
+                this.dgvGastoEspecifico.Rows.Clear();
+                foreach (DataRow rw in mDtMetaEspecificoDeGasto.Rows)
+                {
+                    dgvGastoEspecifico.Rows.Add();
+                    int RowIndex = dgvGastoEspecifico.RowCount - 1;
+                    DataGridViewRow R = dgvGastoEspecifico.Rows[RowIndex];
+                    R.Cells["colAnio"].Value = rw["MEGA_VCH_ANIO"];
+                    R.Cells["colIdMeta"].Value = rw["META_VCH_IDMETA"];
+                    R.Cells["colEspecificaGasto"].Value = rw["EGAS_VCH_IDESPECIFICADEGASTO"];
+                    R.Cells["colPIM"].Value = rw["MEGA_DEC_PIM"];
+                    R.Cells["colModifiacion"].Value = rw["MEGA_MODIFICACION"];
+                    R.Cells["colPresupuesto"].Value = rw["MEGA_PRESUPUESTO"];
+                    R.Cells["colEnero"].Value = rw["ENERO"];
+                    R.Cells["colFebrero"].Value = rw["FEBRERO"];
+                    R.Cells["colMarzo"].Value = rw["MARZO"];
+                    R.Cells["colAbril"].Value = rw["ABRIL"];
+                    R.Cells["colMayo"].Value = rw["MAYO"];
+                    R.Cells["colJunio"].Value = rw["JUNIO"];
+                    R.Cells["colJulio"].Value = rw["AGOSTO"];
+                    R.Cells["colAgosto"].Value = rw["SEPTIEMBRE"];
+                    R.Cells["colSetiembre"].Value = rw["OCTUBRE"];
+                    R.Cells["colNoviembre"].Value = rw["NOVIEMBRE"];
+                    R.Cells["colDiciembre"].Value = rw["DICIEMBRE"];
+                    R.Cells["colEjecutado"].Value = rw["TOTALEJECUTADO"];
+                    R.Cells["colSaldo"].Value = rw["SADOEJERCICIO"];
+                }
+            }
+            b_Buscar = false;
         }
     }
 }

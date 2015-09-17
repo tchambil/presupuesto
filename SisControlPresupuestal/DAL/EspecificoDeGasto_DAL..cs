@@ -17,7 +17,7 @@ namespace DAL
         public void AgregarEspecificaDeGasto(EspecificoDeGasto_BUS esp)
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("USP_A_SICOP_ESPECIFICADEGASTO", con);
+            SqlCommand cmd = new SqlCommand("USP_I_SICOP_ESPECIFICADEGASTO", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@EGAS_VCH_IDESPECIFICADEGASTO", esp.EGAS_VCH_IDESPECIFICADEGASTO);
             cmd.Parameters.AddWithValue("@EGAS_VCH_DESCRIPCION", esp.EGAS_VCH_DESCRIPCION);

@@ -102,12 +102,12 @@ namespace BUS
             }
             return b_MetaEspecifica;
         }
-        public DataTable List_MetaEspecificaDeGasto(String idMeta)
+        public DataTable List_MetaEspecificaDeGasto(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto)
         {
             DataTable mDtMetaEspecificaDeGasto = new DataTable();
             try
             {
-                mDtMetaEspecificaDeGasto = new MetaEspecificoDeGasto_DAL().List_MetaEspecificaDeGasto(idMeta);
+                mDtMetaEspecificaDeGasto = new MetaEspecificoDeGasto_DAL().List_MetaEspecificaDeGasto(pMetaEspecificoDeGasto);
 
             }
             catch (Exception ex) { throw ex; }

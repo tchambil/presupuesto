@@ -20,7 +20,7 @@ namespace DAL
           
             try
            {
-                 SqlCommand cmdComand = new SqlCommand("USP_A_SICOP_CONTROLPRESUPUESTAL");
+                 SqlCommand cmdComand = new SqlCommand("USP_I_SICOP_CONTROLPRESUPUESTAL");
                 cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
                 cmdComand.Connection = TransControlPresupuestal.Connection;
                 cmdComand.Transaction = TransControlPresupuestal;
