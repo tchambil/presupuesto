@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle93 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle94 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle95 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle97 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle98 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle99 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle100 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle101 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle102 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle103 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle104 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle105 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle106 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle107 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle108 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -97,6 +97,7 @@
             this.colIdEspecificaModificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colImporteModificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGastoEspecifico)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -258,10 +259,10 @@
             // colPIM
             // 
             this.colPIM.DataPropertyName = "MEGA_DEC_PIM";
-            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle91.Format = "N2";
-            dataGridViewCellStyle91.NullValue = null;
-            this.colPIM.DefaultCellStyle = dataGridViewCellStyle91;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colPIM.DefaultCellStyle = dataGridViewCellStyle1;
             this.colPIM.HeaderText = "PIM";
             this.colPIM.Name = "colPIM";
             this.colPIM.ReadOnly = true;
@@ -270,10 +271,10 @@
             // colModifiacion
             // 
             this.colModifiacion.DataPropertyName = "MEGA_MODIFICACION";
-            dataGridViewCellStyle92.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle92.Format = "N2";
-            dataGridViewCellStyle92.NullValue = null;
-            this.colModifiacion.DefaultCellStyle = dataGridViewCellStyle92;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colModifiacion.DefaultCellStyle = dataGridViewCellStyle2;
             this.colModifiacion.HeaderText = "Modificacion";
             this.colModifiacion.Name = "colModifiacion";
             this.colModifiacion.ReadOnly = true;
@@ -282,10 +283,10 @@
             // colPresupuesto
             // 
             this.colPresupuesto.DataPropertyName = "MEGA_PRESUPUESTO";
-            dataGridViewCellStyle93.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle93.Format = "N2";
-            dataGridViewCellStyle93.NullValue = null;
-            this.colPresupuesto.DefaultCellStyle = dataGridViewCellStyle93;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colPresupuesto.DefaultCellStyle = dataGridViewCellStyle3;
             this.colPresupuesto.HeaderText = "Presupuesto";
             this.colPresupuesto.Name = "colPresupuesto";
             this.colPresupuesto.ReadOnly = true;
@@ -294,9 +295,9 @@
             // colEnero
             // 
             this.colEnero.DataPropertyName = "ENERO";
-            dataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle94.Format = "N2";
-            this.colEnero.DefaultCellStyle = dataGridViewCellStyle94;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.colEnero.DefaultCellStyle = dataGridViewCellStyle4;
             this.colEnero.HeaderText = "Enero";
             this.colEnero.Name = "colEnero";
             this.colEnero.ReadOnly = true;
@@ -305,9 +306,9 @@
             // colFebrero
             // 
             this.colFebrero.DataPropertyName = "FEBRERO";
-            dataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle95.Format = "N2";
-            this.colFebrero.DefaultCellStyle = dataGridViewCellStyle95;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.colFebrero.DefaultCellStyle = dataGridViewCellStyle5;
             this.colFebrero.HeaderText = "Febrero";
             this.colFebrero.Name = "colFebrero";
             this.colFebrero.ReadOnly = true;
@@ -316,9 +317,9 @@
             // colMarzo
             // 
             this.colMarzo.DataPropertyName = "MARZO";
-            dataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle96.Format = "N2";
-            this.colMarzo.DefaultCellStyle = dataGridViewCellStyle96;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.colMarzo.DefaultCellStyle = dataGridViewCellStyle6;
             this.colMarzo.HeaderText = "Marzo";
             this.colMarzo.Name = "colMarzo";
             this.colMarzo.ReadOnly = true;
@@ -327,9 +328,9 @@
             // colAbril
             // 
             this.colAbril.DataPropertyName = "ABRIL";
-            dataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle97.Format = "N2";
-            this.colAbril.DefaultCellStyle = dataGridViewCellStyle97;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.colAbril.DefaultCellStyle = dataGridViewCellStyle7;
             this.colAbril.HeaderText = "Abril";
             this.colAbril.Name = "colAbril";
             this.colAbril.ReadOnly = true;
@@ -338,9 +339,9 @@
             // colMayo
             // 
             this.colMayo.DataPropertyName = "MAYO";
-            dataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle98.Format = "N2";
-            this.colMayo.DefaultCellStyle = dataGridViewCellStyle98;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            this.colMayo.DefaultCellStyle = dataGridViewCellStyle8;
             this.colMayo.HeaderText = "Mayo";
             this.colMayo.Name = "colMayo";
             this.colMayo.ReadOnly = true;
@@ -349,9 +350,9 @@
             // colJunio
             // 
             this.colJunio.DataPropertyName = "JUNIO";
-            dataGridViewCellStyle99.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle99.Format = "N2";
-            this.colJunio.DefaultCellStyle = dataGridViewCellStyle99;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            this.colJunio.DefaultCellStyle = dataGridViewCellStyle9;
             this.colJunio.HeaderText = "Junio";
             this.colJunio.Name = "colJunio";
             this.colJunio.ReadOnly = true;
@@ -360,9 +361,9 @@
             // colJulio
             // 
             this.colJulio.DataPropertyName = "JULIO";
-            dataGridViewCellStyle100.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle100.Format = "N2";
-            this.colJulio.DefaultCellStyle = dataGridViewCellStyle100;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            this.colJulio.DefaultCellStyle = dataGridViewCellStyle10;
             this.colJulio.HeaderText = "Julio";
             this.colJulio.Name = "colJulio";
             this.colJulio.ReadOnly = true;
@@ -371,9 +372,9 @@
             // colAgosto
             // 
             this.colAgosto.DataPropertyName = "AGOSTO";
-            dataGridViewCellStyle101.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle101.Format = "N2";
-            this.colAgosto.DefaultCellStyle = dataGridViewCellStyle101;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            this.colAgosto.DefaultCellStyle = dataGridViewCellStyle11;
             this.colAgosto.HeaderText = "Agosto";
             this.colAgosto.Name = "colAgosto";
             this.colAgosto.ReadOnly = true;
@@ -382,9 +383,9 @@
             // colSetiembre
             // 
             this.colSetiembre.DataPropertyName = "SEPTIEMBRE";
-            dataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle102.Format = "N2";
-            this.colSetiembre.DefaultCellStyle = dataGridViewCellStyle102;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            this.colSetiembre.DefaultCellStyle = dataGridViewCellStyle12;
             this.colSetiembre.HeaderText = "Setiembre";
             this.colSetiembre.Name = "colSetiembre";
             this.colSetiembre.ReadOnly = true;
@@ -393,9 +394,9 @@
             // colOctubre
             // 
             this.colOctubre.DataPropertyName = "OCTUBRE";
-            dataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle103.Format = "N2";
-            this.colOctubre.DefaultCellStyle = dataGridViewCellStyle103;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N2";
+            this.colOctubre.DefaultCellStyle = dataGridViewCellStyle13;
             this.colOctubre.HeaderText = "Octubre";
             this.colOctubre.Name = "colOctubre";
             this.colOctubre.ReadOnly = true;
@@ -404,9 +405,9 @@
             // colNoviembre
             // 
             this.colNoviembre.DataPropertyName = "NOVIEMBRE";
-            dataGridViewCellStyle104.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle104.Format = "N2";
-            this.colNoviembre.DefaultCellStyle = dataGridViewCellStyle104;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N2";
+            this.colNoviembre.DefaultCellStyle = dataGridViewCellStyle14;
             this.colNoviembre.HeaderText = "Noviembre";
             this.colNoviembre.Name = "colNoviembre";
             this.colNoviembre.ReadOnly = true;
@@ -415,9 +416,9 @@
             // colDiciembre
             // 
             this.colDiciembre.DataPropertyName = "DICIEMBRE";
-            dataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle105.Format = "N2";
-            this.colDiciembre.DefaultCellStyle = dataGridViewCellStyle105;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N2";
+            this.colDiciembre.DefaultCellStyle = dataGridViewCellStyle15;
             this.colDiciembre.HeaderText = "Diciembre";
             this.colDiciembre.Name = "colDiciembre";
             this.colDiciembre.ReadOnly = true;
@@ -426,9 +427,9 @@
             // colEjecutado
             // 
             this.colEjecutado.DataPropertyName = "TOTALEJECUTADO";
-            dataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle106.Format = "N2";
-            this.colEjecutado.DefaultCellStyle = dataGridViewCellStyle106;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N2";
+            this.colEjecutado.DefaultCellStyle = dataGridViewCellStyle16;
             this.colEjecutado.HeaderText = "Ejecutado";
             this.colEjecutado.Name = "colEjecutado";
             this.colEjecutado.ReadOnly = true;
@@ -437,9 +438,9 @@
             // colSaldo
             // 
             this.colSaldo.DataPropertyName = "SADOEJERCICIO";
-            dataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle107.Format = "N2";
-            this.colSaldo.DefaultCellStyle = dataGridViewCellStyle107;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle17.Format = "N2";
+            this.colSaldo.DefaultCellStyle = dataGridViewCellStyle17;
             this.colSaldo.HeaderText = "Saldo";
             this.colSaldo.Name = "colSaldo";
             this.colSaldo.ReadOnly = true;
@@ -544,6 +545,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnEliminar);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.btnGuardarModifica);
             this.tabPage2.Controls.Add(this.btnNuevoModifica);
@@ -662,9 +664,9 @@
             // colImporteModificado
             // 
             this.colImporteModificado.DataPropertyName = "MEGM_DEC_PIMMODIFICADO";
-            dataGridViewCellStyle108.Format = "N2";
-            dataGridViewCellStyle108.NullValue = null;
-            this.colImporteModificado.DefaultCellStyle = dataGridViewCellStyle108;
+            dataGridViewCellStyle18.Format = "N2";
+            dataGridViewCellStyle18.NullValue = null;
+            this.colImporteModificado.DefaultCellStyle = dataGridViewCellStyle18;
             this.colImporteModificado.HeaderText = "Importe";
             this.colImporteModificado.Name = "colImporteModificado";
             this.colImporteModificado.ReadOnly = true;
@@ -678,6 +680,17 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Location = new System.Drawing.Point(206, 123);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 110;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // DetalleControlPresupuestalUI
             // 
@@ -762,5 +775,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSaldo;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

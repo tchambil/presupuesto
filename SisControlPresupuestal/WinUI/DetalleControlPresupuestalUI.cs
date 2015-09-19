@@ -48,6 +48,7 @@ namespace WinUI
             this.txtAnio.Text = DateTime.Today.Year.ToString();
             this.dgvGastoEspecifico.Enabled = true;
             this.btnGuardarModifica.Enabled = false;
+            this.btnEliminar.Enabled = false;
 
         }
         private void prcActiveButton(bool b_pState, bool b_lMod)
@@ -368,6 +369,8 @@ namespace WinUI
         private void dgvModificado_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             this.prcSeleccionarFilaMetaEspeficaModificado();
+            this.btnEliminar.Enabled = true;
+
         }
 
         private void dgvModificado_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -545,6 +548,37 @@ namespace WinUI
             {
                 e.Handled = true;
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvModificado.Rows.Count > 0)
+            {
+                MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
+                pMetaEspecificoDeGastoModificado.MEGM_INT_IDMODIFICACION = Convert.ToInt32(dgvModificado["colIdModificado", dgvModificado.CurrentRow.Index].Value) ;
+                pMetaEspecificoDeGastoModificado.META_VCH_IDMETA = dgvModificado["colidMetaModificado", dgvModificado.CurrentRow.Index].Value.ToString() ;
+                pMetaEspecificoDeGastoModificado.EGAS_VCH_IDESPECIFICADEGASTO = dgvModificado["colIdEspecificaModificado", dgvModificado.CurrentRow.Index].Value.ToString();
+              
+                MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
+                pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = pMetaEspecificoDeGastoModificado.EGAS_VCH_IDESPECIFICADEGASTO;
+                pMetaEspecificoDeGasto.META_VCH_IDMETA = pMetaEspecificoDeGastoModificado.META_VCH_IDMETA;
+
+                if (MessageBox.Show("¿Desea Eliminar Registro", "Modificaciones", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                               if (new MetaEspecificoDeGastoModificado_BUS().Delete_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
+                            {
+                                prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
+                                prcList_MetaEspecificoDeGasto();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al guardar Registro");
+                            }
+
+                        
+                    }
+                }
+            
         }
     }
 }

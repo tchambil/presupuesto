@@ -17,7 +17,7 @@ namespace DAL
 
             try
             {
-                SqlCommand cmdComand = new SqlCommand("USP_A_SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES");
+                SqlCommand cmdComand = new SqlCommand("USP_I_SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES");
                 cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
                 cmdComand.Connection = TransControlPresupuestal.Connection;
                 cmdComand.Transaction = TransControlPresupuestal;
@@ -62,7 +62,29 @@ namespace DAL
             }
             return b_MetaEspecifica;
         }
+        public bool Delete_MetaEspecificoDeGastoMoficado(MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado, SqlTransaction TransControlPresupuestal)
+        {
+            bool b_MetaEspecifica;
 
+            try
+            {
+                SqlCommand cmdComand = new SqlCommand("USP_D_SICOP_META_ESPECIFICADEGASTO_MODIFICACIONES");
+                cmdComand.CommandType = System.Data.CommandType.StoredProcedure;
+                cmdComand.Connection = TransControlPresupuestal.Connection;
+                cmdComand.Transaction = TransControlPresupuestal;
+                cmdComand.Parameters.Clear();
+                cmdComand.Parameters.AddWithValue("@MEGM_INT_IDMODIFICACION", pMetaEspecificoDeGastoModificado.MEGM_INT_IDMODIFICACION); 
+                b_MetaEspecifica = cmdComand.ExecuteNonQuery() > 0;
+
+            }
+            catch (Exception e)
+            {
+                if (e.Source != null)
+                    Console.WriteLine("IOException source: {0}", e.Source);
+                throw;
+            }
+            return b_MetaEspecifica;
+        }
         public DataTable List_MetaEspecificaDeGasto(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto)
         {
             DataTable mDtMetaEspecificaDeGastoModificado = new DataTable();

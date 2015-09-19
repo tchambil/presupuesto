@@ -102,6 +102,51 @@ namespace BUS
             }
             return b_MetaEspecificaModificado;
         }
+        public bool Delete_MetaEspecificoDeGastoModificado(MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado)
+        {
+            SqlConnection sqlConection = null;
+            SqlTransaction TransMetaEspecificaMoficado = null;
+            bool b_MetaEspecificaModificado = false;
+
+            try
+            {
+                sqlConection = new SqlConnection(BEConexion.vg_strCadenaConexion);
+                sqlConection.Open();
+                TransMetaEspecificaMoficado = sqlConection.BeginTransaction();
+                if (pMetaEspecificoDeGastoModificado != null)
+                {
+                    b_MetaEspecificaModificado = new MetaEspecificoDeGastoModificado_DAL().Delete_MetaEspecificoDeGastoMoficado(pMetaEspecificoDeGastoModificado, TransMetaEspecificaMoficado);
+
+
+                }
+                if (b_MetaEspecificaModificado)
+                {
+                    TransMetaEspecificaMoficado.Commit();
+
+                }
+                else
+                {
+                    TransMetaEspecificaMoficado.Rollback();
+                }
+            }
+
+            catch (Exception exception)
+            {
+                if (TransMetaEspecificaMoficado != null)
+                    TransMetaEspecificaMoficado.Rollback();
+                return false;
+            }
+            finally
+            {
+                if (sqlConection != null)
+                {
+                    sqlConection.Close();
+                }
+                sqlConection.Dispose();
+
+            }
+            return b_MetaEspecificaModificado;
+        }
         public DataTable List_MetaEspecificaDeGastoModificado(MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto)
         {
             DataTable mDtMetaEspecificaDeGastoModifica = new DataTable();
