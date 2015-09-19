@@ -47,6 +47,7 @@ namespace WinUI
             this.txtpim.Text = "0";
             this.txtAnio.Text = DateTime.Today.Year.ToString();
             this.dgvGastoEspecifico.Enabled = true;
+            this.btnGuardarModifica.Enabled = false;
 
         }
         private void prcActiveButton(bool b_pState, bool b_lMod)
@@ -75,7 +76,7 @@ namespace WinUI
         {
             MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
             pMetaEspecificoDeGasto = this.prcGetMetaEspecificoDeGasto();
-  
+
 
             DataTable mDtMetaEspecificoDeGasto = new MetaEspecificoDeGasto_BUS().List_MetaEspecificaDeGasto(pMetaEspecificoDeGasto);
 
@@ -153,7 +154,7 @@ namespace WinUI
                 sumatoria += Convert.ToDouble(item.Cells[19].Value);
 
             }
-            this.txtTotal.Text = sumatoria.ToString();
+            this.txtTotal.Text = sumatoria.ToString("N2");
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -202,7 +203,7 @@ namespace WinUI
             cmbMetas.SelectedValue = dgvGastoEspecifico["colIdMeta", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
             cmbEspecifica.SelectedValue = dgvGastoEspecifico["colEspecificaGasto", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
             txtpim.Text = dgvGastoEspecifico["colPIM", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
-           
+
             pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = dgvGastoEspecifico["colEspecificaGasto", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
             pMetaEspecificoDeGasto.META_VCH_IDMETA = dgvGastoEspecifico["colIdMeta", dgvGastoEspecifico.CurrentRow.Index].Value.ToString();
 
@@ -273,7 +274,7 @@ namespace WinUI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            
+
             WinForm.pfCleanTextBox(this);
             WinForm.pfActiveControl(this, false);
             prcActiveButton(true, false);
@@ -290,54 +291,71 @@ namespace WinUI
 
         private void dgvGastoEspecifico_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvGastoEspecifico.Rows.Count - 1 > 0) {
+            if (dgvGastoEspecifico.Rows.Count - 1 > 0)
+            {
                 prcSeleccionarFilaMetaEspefica();
                 this.btnModificar.Enabled = true;
+                this.btnGuardarModifica.Enabled = true;
             }
-           
+
         }
 
 
 
         private void btnGuardarModifica_Click(object sender, EventArgs e)
         {
-
-            if (MessageBox.Show("¿Guardar el Registro?", "Modificaciones", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (dgvGastoEspecifico.Rows.Count - 1 > 0)
             {
-                MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
-                pMetaEspecificoDeGastoModificado = this.prcGetMetaEspecificoDeGastoModificado();
-
-                MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
-                pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = pMetaEspecificoDeGastoModificado.EGAS_VCH_IDESPECIFICADEGASTO;
-                pMetaEspecificoDeGasto.META_VCH_IDMETA = pMetaEspecificoDeGastoModificado.META_VCH_IDMETA;
-
-                if (Nuevo == true)
+                if (!(this.txtPIModificado.Text.Equals("")))
                 {
-                    if (new MetaEspecificoDeGastoModificado_BUS().Insert_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
-                    {
 
-                        WinForm.pfActiveButon(this, false);
-                        prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
+
+                    if (MessageBox.Show("¿Guardar el Registro?", "Modificaciones", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        MetaEspecificoDeGastoModificado_VO pMetaEspecificoDeGastoModificado = new MetaEspecificoDeGastoModificado_VO();
+                        pMetaEspecificoDeGastoModificado = this.prcGetMetaEspecificoDeGastoModificado();
+
+                        MetaEspecificoDeGasto_VO pMetaEspecificoDeGasto = new MetaEspecificoDeGasto_VO();
+                        pMetaEspecificoDeGasto.EGAS_VCH_IDESPECIFICADEGASTO = pMetaEspecificoDeGastoModificado.EGAS_VCH_IDESPECIFICADEGASTO;
+                        pMetaEspecificoDeGasto.META_VCH_IDMETA = pMetaEspecificoDeGastoModificado.META_VCH_IDMETA;
+
+                        if (Nuevo == true)
+                        {
+                            if (new MetaEspecificoDeGastoModificado_BUS().Insert_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
+                            {
+
+
+                                prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
+                                prcList_MetaEspecificoDeGasto();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al guardar Registro");
+                            }
+
+                        }
+                        else
+                        {
+
+                            if (new MetaEspecificoDeGastoModificado_BUS().Update_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
+                            {
+
+                                prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
+                                prcList_MetaEspecificoDeGasto();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al guardar Registro");
+                            }
+                        }
+
 
                     }
-                    else
-                    {
-                        MessageBox.Show("Error al guardar Registro");
-                    }
-
                 }
                 else
                 {
 
-                    if (new MetaEspecificoDeGastoModificado_BUS().Update_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGastoModificado))
-                    {
-                        WinForm.pfActiveButon(this, false);
-                        prcList_MetaEspecificoDeGastoModificado(pMetaEspecificoDeGasto);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al guardar Registro");
-                    }
+                    MessageBox.Show("Error al ingresa Importe");
                 }
             }
         }
@@ -488,8 +506,45 @@ namespace WinUI
                     R.Cells["colEjecutado"].Value = rw["TOTALEJECUTADO"];
                     R.Cells["colSaldo"].Value = rw["SADOEJERCICIO"];
                 }
+                prcCalculoTotalSaldo();
             }
             b_Buscar = false;
+        }
+
+        private void btnModificarModifica_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNuevoModifica_Click(object sender, EventArgs e)
+        {
+            txtPIModificado.Text = "";
+        }
+
+        private void txtAnio_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPIModificado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CultureInfo cc = System.Threading.Thread.CurrentThread.CurrentCulture;
+            if (char.IsNumber(e.KeyChar) || e.KeyChar.ToString() == cc.NumberFormat.NumberDecimalSeparator)
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == 13)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }
