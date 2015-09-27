@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backup_DAL.cs" />
     <Compile Include="DetalleControlPresupuestal_DAL..cs" />
     <Compile Include="Documento_DAL..cs" />
     <Compile Include="CONEXION_DAL.cs" />

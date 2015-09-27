@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backup_BUS.cs" />
     <Compile Include="DetalleControlPresupuestal_BUS.cs" />
     <Compile Include="Documento_BUS.cs" />
     <Compile Include="EspecificoDeGasto_BUS.cs" />
